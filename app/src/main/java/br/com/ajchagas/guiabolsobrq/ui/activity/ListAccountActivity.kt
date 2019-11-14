@@ -1,5 +1,6 @@
 package br.com.ajchagas.guiabolsobrq.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import br.com.ajchagas.guiabolsobrq.R
@@ -20,6 +21,12 @@ class ListAccountActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         title = "Conta"
 
+        listaContasParaTeste()
+        configuraAdapterRecycler()
+        configuraFAB()
+    }
+
+    private fun listaContasParaTeste() {
         val mutableListOf = mutableListOf<Conta>(
             Conta(
                 apelido = "Itaú",
@@ -36,7 +43,8 @@ class ListAccountActivity : AppCompatActivity() {
                 apelido = "Nubank",
                 agencia = "0001",
                 numeroConta = "10320-5",
-                saldo = BigDecimal(7000.00)),
+                saldo = BigDecimal(7000.00)
+            ),
             Conta(
                 apelido = "Itaú",
                 agencia = "1220",
@@ -52,7 +60,8 @@ class ListAccountActivity : AppCompatActivity() {
                 apelido = "Nubank",
                 agencia = "0001",
                 numeroConta = "10320-5",
-                saldo = BigDecimal(7000.00)),
+                saldo = BigDecimal(7000.00)
+            ),
             Conta(
                 apelido = "Itaú",
                 agencia = "1220",
@@ -68,24 +77,27 @@ class ListAccountActivity : AppCompatActivity() {
                 apelido = "Nubank",
                 agencia = "0001",
                 numeroConta = "10320-5",
-                saldo = BigDecimal(7000.00))
+                saldo = BigDecimal(7000.00)
+            )
         )
 
         listaContas.addAll(mutableListOf)
+    }
 
+    private fun configuraAdapterRecycler() {
         val recyclerView = list_account_recyclerview
         recyclerView.adapter = ListAccountAdapter(listaContas, this)
-
-
-
-        configuraFAB()
     }
 
     private fun configuraFAB() {
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            abreActivityCadastroConta()
         }
+    }
+
+    private fun abreActivityCadastroConta() {
+        val vaiParaActivityCadastroConta = Intent(this, CadastroContaActivity::class.java)
+        startActivity(vaiParaActivityCadastroConta)
     }
 
 
