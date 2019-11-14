@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.activity.ExtratoActivity">
+
+    <ImageView
+        android:id="@+id/extrato_imageview_azul_topo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/extrato_imageview_pipe_branco_layout"
+        android:layout_width="3dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_detalhes_layout"
+        app:layout_constraintEnd_toStartOf="@+id/extrato_textview_detalhes_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_detalhes_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="100dp"
+        android:text="Detalhes"
+        android:fontFamily="@font/roboto_medium"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/extrato_imageview_azul_topo_layout"
+        app:layout_constraintTop_toTopOf="@+id/extrato_imageview_azul_topo_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_saldo_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="SALDO"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_imageview_azul_topo_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_saldo_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="R$ 1.000,00"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_saldo_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_nome_titular_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/black"
+        android:text="Nome do titular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_saldo_total" />
+
+    <TextView
+        android:id="@+id/extrato_textview_apelido_conta_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Apelido da conta"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_titular_layout"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_nome_titular_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_agencia_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Agência"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_apelido_conta_layout"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_apelido_conta_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_conta_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Conta"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_agencia_layout"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_agencia_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_nome_titular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Robson Medeiros"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_nome_titular_layout"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/extrato_textview_nome_banco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Itaú"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_apelido_conta_layout"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_titular" />
+
+    <TextView
+        android:id="@+id/extrato_textview_numero_agencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0000"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_agencia_layout"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_banco" />
+
+    <TextView
+        android:id="@+id/extrato_textview_numero_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00000-0"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_conta_layout"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_numero_agencia" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

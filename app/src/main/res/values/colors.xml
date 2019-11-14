@@ -2,5 +2,6 @@
 <resources>
     <color name="colorPrimary">#2B3D56</color>
     <color name="colorPrimaryDark">#00172D</color>
-    <color name="colorAccent">#FF8C00</color>
+    <color name="colorAccent">#FBF9F6</color>
+    <color name="cinza_fundo_imageview">#03000000</color>
 </resources>
