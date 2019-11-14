@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.CadastroContaActivity">
+
+    <ImageView
+        android:id="@+id/cadastro_imageview_azul_topo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/cadastro_imageview_pipe_branco_layout"
+        android:layout_width="3dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="3dp"
+        android:background="@color/cinza_fundo_imageview"
+        app:layout_constraintBottom_toBottomOf="@+id/cadastro_textview_cadastro_conta_layout"
+        app:layout_constraintEnd_toStartOf="@+id/cadastro_textview_cadastro_conta_layout" />
+
+    <TextView
+        android:id="@+id/cadastro_textview_cadastro_conta_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="100dp"
+        android:text="Cadastro Conta"
+        android:fontFamily="@font/roboto_medium"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/cadastro_imageview_azul_topo_layout"
+        app:layout_constraintTop_toTopOf="@+id/cadastro_imageview_azul_topo_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_apelido_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_imageview_azul_topo_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:hint="Apelido da conta" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_nome_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLength="25"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_textview_apelido_layout"
+        app:layout_constraintStart_toStartOf="@id/cadastro_textview_apelido_layout"
+        app:layout_constraintEnd_toEndOf="@id/cadastro_textview_apelido_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:hint="Nome do titular" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_agencia_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_textview_nome_layout"
+        app:layout_constraintStart_toStartOf="@id/cadastro_textview_nome_layout"
+        app:layout_constraintEnd_toEndOf="@id/cadastro_textview_nome_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="4"
+            android:hint="Agência" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_conta_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_textview_agencia_layout"
+        app:layout_constraintStart_toStartOf="@id/cadastro_textview_agencia_layout"
+        app:layout_constraintEnd_toEndOf="@id/cadastro_textview_agencia_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="6"
+            android:hint="Conta" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
