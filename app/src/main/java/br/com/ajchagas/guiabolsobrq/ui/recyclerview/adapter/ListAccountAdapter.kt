@@ -36,6 +36,7 @@ class ListAccountAdapter(
 
         fun bindView(conta: Conta) {
 
+
             val apelido = itemView.item_conta_apelido
             val agencia = itemView.item_conta_textview_agencia
             val numeroConta = itemView.item_conta_textview_numero_conta

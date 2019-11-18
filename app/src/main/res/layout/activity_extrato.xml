@@ -20,7 +20,7 @@
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="3dp"
-        android:background="@color/colorAccent"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_detalhes_layout"
         app:layout_constraintEnd_toStartOf="@+id/extrato_textview_detalhes_layout" />
 
@@ -42,11 +42,10 @@
         android:id="@+id/extrato_textview_saldo_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto_medium"
         android:text="SALDO"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +58,7 @@
         android:fontFamily="@font/roboto_medium"
         android:text="R$ 1.000,00"
         android:textColor="@android:color/black"
-        android:textSize="40sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extrato_textview_saldo_layout" />
@@ -68,10 +67,10 @@
         android:id="@+id/extrato_textview_nome_titular_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@android:color/black"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:text="Nome do titular"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/extrato_textview_saldo_total" />
 
@@ -109,7 +108,7 @@
         android:id="@+id/extrato_textview_nome_titular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         android:text="Robson Medeiros"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_nome_titular_layout"
@@ -141,6 +140,70 @@
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_conta_layout"
         app:layout_constraintStart_toStartOf="@+id/extrato_textview_numero_agencia" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_conta_layout">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/extrato_textview_de_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="De"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/extrato_edittext_input_data_de"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/extrato_edittext_input_data_de"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/11/2019"
+                app:layout_constraintStart_toEndOf="@id/extrato_textview_de_layout"
+                app:layout_constraintEnd_toStartOf="@id/extrato_textview_ate_layout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/extrato_textview_ate_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Até"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@id/extrato_edittext_input_data_ate"
+                app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_de_layout"
+                app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_de" />
+
+            <EditText
+                android:id="@+id/extrato_edittext_input_data_ate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/11/2019"
+                app:layout_constraintStart_toEndOf="@+id/extrato_textview_ate_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

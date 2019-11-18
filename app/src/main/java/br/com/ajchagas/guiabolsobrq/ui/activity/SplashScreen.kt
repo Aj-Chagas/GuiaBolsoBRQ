@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import br.com.ajchagas.guiabolsobrq.R
+import kotlinx.android.synthetic.main.recycler_view_list_account.*
 
 class SplashScreen : AppCompatActivity() {
 
@@ -13,7 +14,7 @@ class SplashScreen : AppCompatActivity() {
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
 
-            val intent = Intent(applicationContext, ExtratoActivity::class.java)
+            val intent = Intent(applicationContext, ListAccountActivity::class.java)
             startActivity(intent)
             finish()
         }

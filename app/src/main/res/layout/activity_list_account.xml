@@ -30,6 +30,14 @@
             android:layout_height="90dp"
             android:layout_gravity="bottom">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="@color/cinza_fundo_imageview"
+                android:contentDescription="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
                 android:id="@+id/item_saldo_total_layout"
                 android:layout_width="wrap_content"
@@ -55,14 +63,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/item_saldo_total_layout"
                 app:layout_constraintTop_toBottomOf="@id/item_saldo_total_layout" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:background="@color/cinza_fundo_imageview"
-                android:contentDescription="@null"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
