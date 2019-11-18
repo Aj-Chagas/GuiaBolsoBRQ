@@ -14,10 +14,18 @@ class CadastroContaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cadastro)
 
         configuraToolBar()
+        configuraSpinner()
+
+    }
+
+    private fun configuraSpinner() {
         val spinnerBancos = cadastro_spinner_bancos
         val listBancos = spinnerBancos.resources.getStringArray(R.array.lista_bancos)
-        spinnerBancos.adapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, listBancos)
-
+        spinnerBancos.adapter =
+            ArrayAdapter<String>(
+                this,
+                R.layout.support_simple_spinner_dropdown_item,
+                listBancos)
     }
 
     private fun configuraToolBar() {
