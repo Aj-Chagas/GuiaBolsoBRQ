@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.CadastroContaActivity">
 
-    <include layout="@layout/collapsing_toolbar"
+    <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -23,8 +23,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            android:hint="Apelido da conta" />
+            android:fontFamily="@font/roboto"
+            android:hint="Apelido da conta"
+            android:inputType="textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -40,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
+            android:fontFamily="@font/roboto"
             android:hint="Nome do titular" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:maxLength="4"
+            android:fontFamily="@font/roboto"
             android:hint="Agência" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,8 +75,46 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:maxLength="6"
+            android:fontFamily="@font/roboto"
             android:hint="Conta" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/cadastro_spinner_bancos"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_margin="16dp"
+        android:tooltipText=""
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_textview_conta_layout"
+        app:layout_constraintEnd_toEndOf="@+id/cadastro_textview_conta_layout"
+        app:layout_constraintStart_toStartOf="@+id/cadastro_textview_conta_layout" />
+
+
+    <Button
+        android:id="@+id/cadastro_botao_Salvar"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:background="@drawable/botao_arredondado_laranja"
+        android:text="SALVAR"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_spinner_bancos"
+        app:layout_constraintEnd_toEndOf="@+id/cadastro_spinner_bancos"
+        app:layout_constraintStart_toStartOf="@+id/cadastro_spinner_bancos"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="381dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:text="CANCELAR"
+        android:elevation="20dp"
+        android:background="@drawable/botao_arredondado_branco"
+        app:layout_constraintEnd_toEndOf="@+id/cadastro_botao_Salvar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/cadastro_botao_Salvar"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_botao_Salvar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
