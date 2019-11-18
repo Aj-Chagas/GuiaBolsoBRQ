@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter.ListAccountAdapter
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_list_account.*
-import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.recycler_view_list_account.*
 import java.math.BigDecimal
 
@@ -87,9 +85,16 @@ class ListAccountActivity : AppCompatActivity() {
     }
 
     private fun configuraAdapterRecycler() {
-        val recyclerView = list_account_recyclerview
-        recyclerView.adapter = ListAccountAdapter(listaContas, this)
+        val adapter = ListAccountAdapter(listaContas, this)
+        list_account_recyclerview.adapter = adapter
+        adapter.clickListener = this::abreActivityExtrato
     }
+
+    private fun abreActivityExtrato(conta: Conta) {
+        val intent = Intent(this, ExtratoActivity::class.java)
+        startActivity(intent)
+    }
+
 
     private fun configuraFAB() {
         fab.setOnClickListener { view ->
