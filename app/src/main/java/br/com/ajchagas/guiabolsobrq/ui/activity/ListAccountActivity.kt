@@ -8,6 +8,7 @@ import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter.ListAccountAdapter
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_list_account.*
+import kotlinx.android.synthetic.main.collapsing_toolbar.*
 import kotlinx.android.synthetic.main.recycler_view_list_account.*
 import java.math.BigDecimal
 
@@ -18,8 +19,9 @@ class ListAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_account)
-        setSupportActionBar(toolbar)
+
         title = "Conta"
+
 
         listaContasParaTeste()
         configuraAdapterRecycler()

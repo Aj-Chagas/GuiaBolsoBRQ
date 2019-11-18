@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="90dp"
+
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.activity.ListAccountActivity"
-    tools:showIn="@layout/activity_list_account"
-    app:layout_constraintBottom_toTopOf="@+id/item_saldo_total_constraint_layout">
+    tools:showIn="@layout/activity_list_account" >
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_account_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="90dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,4 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
