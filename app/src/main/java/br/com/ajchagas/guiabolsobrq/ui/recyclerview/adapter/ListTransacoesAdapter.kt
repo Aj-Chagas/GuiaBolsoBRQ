@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.ajchagas.guiabolsobrq.R
+import br.com.ajchagas.guiabolsobrq.model.TipoTransacao
 import br.com.ajchagas.guiabolsobrq.model.Transacao
-import br.com.ajchagas.guiabolsobrq.ui.activity.ExtratoActivity
 import kotlinx.android.synthetic.main.extrato_item_transacao.view.*
 
 class ListTransacoesAdapter(
@@ -38,7 +38,12 @@ class ListTransacoesAdapter(
 
         nome.text = transacao.nome
         data.text = transacao.data
-        valor.text = transacao.valor
+        if(transacao.tipo == TipoTransacao.Credito){
+            valor.text = transacao.valor
+        }else{
+            valor.text = "- " + transacao.valor
+        }
+
 
     }
 
