@@ -6,37 +6,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activity.ExtratoActivity">
 
-    <ImageView
-        android:id="@+id/extrato_imageview_azul_topo_layout"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
 
-    <ImageView
-        android:id="@+id/extrato_imageview_pipe_branco_layout"
-        android:layout_width="3dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="3dp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_detalhes_layout"
-        app:layout_constraintEnd_toStartOf="@+id/extrato_textview_detalhes_layout" />
+<!--    <ImageView-->
+<!--        android:id="@+id/extrato_imageview_azul_topo_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"/>-->
 
-    <TextView
-        android:id="@+id/extrato_textview_detalhes_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="100dp"
-        android:text="Detalhes"
-        android:fontFamily="@font/roboto_medium"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/extrato_imageview_azul_topo_layout"
-        app:layout_constraintTop_toTopOf="@+id/extrato_imageview_azul_topo_layout" />
+<!--    <ImageView-->
+<!--        android:id="@+id/extrato_imageview_pipe_branco_layout"-->
+<!--        android:layout_width="3dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="3dp"-->
+<!--        android:background="@android:color/white"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_detalhes_layout"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/extrato_textview_detalhes_layout" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/extrato_textview_detalhes_layout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="28dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:text="Detalhes"-->
+<!--        android:fontFamily="@font/roboto_medium"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textSize="24sp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/extrato_imageview_azul_topo_layout"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/extrato_imageview_azul_topo_layout" />-->
 
     <TextView
         android:id="@+id/extrato_textview_saldo_layout"
@@ -49,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extrato_imageview_azul_topo_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/extrato_textview_saldo_total"
@@ -176,6 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01/11/2019"
+                android:focusable="false"
                 app:layout_constraintStart_toEndOf="@id/extrato_textview_de_layout"
                 app:layout_constraintEnd_toStartOf="@id/extrato_textview_ate_layout"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -197,6 +201,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="01/11/2019"
+                android:focusable="false"
                 app:layout_constraintStart_toEndOf="@+id/extrato_textview_ate_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
