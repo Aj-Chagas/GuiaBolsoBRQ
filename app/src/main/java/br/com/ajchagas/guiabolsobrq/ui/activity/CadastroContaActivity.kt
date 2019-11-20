@@ -8,7 +8,6 @@ import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.validator.ValidacaoPadrao
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.rhexgomez.typer.roboto.TyperRoboto
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import kotlinx.android.synthetic.main.toolbar.*
 

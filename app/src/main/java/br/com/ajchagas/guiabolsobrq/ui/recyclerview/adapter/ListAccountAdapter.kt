@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.ajchagas.guiabolsobrq.R
+import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import kotlinx.android.synthetic.main.item_conta.view.*
 
@@ -40,7 +41,7 @@ class ListAccountAdapter(
             itemView.item_conta_apelido.text = conta.apelido
             itemView.item_conta_textview_agencia.text = conta.agencia
             itemView.item_conta_textview_numero_conta.text = conta.numeroConta
-            itemView.item_conta_textview_saldo.text = conta.saldo.toString()
+            itemView.item_conta_textview_saldo.text = conta.saldo.formataMoedaParaBrasileiro()
             itemView.setOnClickListener { cliclListener(conta) }
 
         }
