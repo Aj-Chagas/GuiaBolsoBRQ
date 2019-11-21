@@ -2,6 +2,10 @@ package br.com.ajchagas.guiabolsobrq.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.model.Conta
@@ -12,7 +16,7 @@ import java.math.BigDecimal
 
 class ListAccountActivity : AppCompatActivity() {
 
-    private val listaContas : MutableList<Conta> = mutableListOf()
+    private val listaContas: MutableList<Conta> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +26,17 @@ class ListAccountActivity : AppCompatActivity() {
 
 
         listaContasParaTeste()
-        configuraAdapterRecycler()
+
+        val adapter = ListAccountAdapter(listaContas, this, clickListener = { contaClicada ->
+            val vaiParaExtrato = Intent(this, ExtratoActivity::class.java)
+            vaiParaExtrato.putExtra("conta", contaClicada)
+            startActivity(vaiParaExtrato)
+        }, longClickListener = {
+            Toast.makeText(this, "funciona", Toast.LENGTH_LONG).show()
+            true
+        })
+        list_account_recyclerview.adapter = adapter
+
         configuraFAB()
     }
 
@@ -84,18 +98,6 @@ class ListAccountActivity : AppCompatActivity() {
         listaContas.addAll(mutableListOf)
     }
 
-    private fun configuraAdapterRecycler() {
-        val adapter = ListAccountAdapter(listaContas, this)
-        list_account_recyclerview.adapter = adapter
-        adapter.clickListener = this::abreActivityExtrato
-    }
-
-    private fun abreActivityExtrato(conta: Conta) {
-        val intent = Intent(this, ExtratoActivity::class.java)
-        startActivity(intent)
-    }
-
-
     private fun configuraFAB() {
         fab.setOnClickListener { view ->
             abreActivityCadastroConta()
@@ -106,6 +108,5 @@ class ListAccountActivity : AppCompatActivity() {
         val vaiParaActivityCadastroConta = Intent(this, CadastroContaActivity::class.java)
         startActivity(vaiParaActivityCadastroConta)
     }
-
 
 }
