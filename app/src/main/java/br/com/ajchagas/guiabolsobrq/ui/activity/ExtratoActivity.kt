@@ -3,10 +3,10 @@ package br.com.ajchagas.guiabolsobrq.ui.activity
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.DatePicker
 import android.widget.EditText
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.extension.formataParaBrasileiro
+import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.model.TipoTransacao
 import br.com.ajchagas.guiabolsobrq.model.Transacao
 import br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter.ListTransacoesAdapter
@@ -24,9 +24,11 @@ class ExtratoActivity : AppCompatActivity() {
         configuraToolBar()
         configuraDatePickerDialog()
 
-        val listaClientes: MutableList<Transacao> = configuraListaTransacoes()
-        configuraRecyclerView(listaClientes)
+        val conta = intent.getSerializableExtra("conta") as Conta
+        extrato_textview_nome_banco.text = conta.apelido
 
+        val listaTransacoes: MutableList<Transacao> = configuraListaTransacoes()
+        configuraRecyclerView(listaTransacoes)
     }
 
     private fun configuraDatePickerDialog() {

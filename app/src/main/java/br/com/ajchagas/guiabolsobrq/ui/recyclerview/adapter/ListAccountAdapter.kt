@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.item_conta.view.*
 class ListAccountAdapter(
     private val contas: MutableList<Conta> = mutableListOf(),
     private val context: Context,
-    var clickListener: (Conta) -> Unit = {}
+    val clickListener: (Conta) -> Unit = {},
+    val longClickListener: (Conta) -> Boolean = {false}
 ) : RecyclerView.Adapter<ListAccountAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,23 +28,27 @@ class ListAccountAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val conta = contas[position]
+        val contaSeleccionada = contas[position]
 
-        holder.bindView(conta, clickListener)
+        holder.bindView(contaSeleccionada, clickListener, longClickListener)
 
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
 
-        fun bindView(conta: Conta, cliclListener: (Conta) -> Unit) {
+        fun bindView(
+            contaSelecionada: Conta,
+            cliclListener: (Conta) -> Unit,
+            longClickListener: (Conta) -> Boolean
+        ) {
 
-            itemView.item_conta_apelido.text = conta.apelido
-            itemView.item_conta_textview_agencia.text = conta.agencia
-            itemView.item_conta_textview_numero_conta.text = conta.numeroConta
-            itemView.item_conta_textview_saldo.text = conta.saldo.formataMoedaParaBrasileiro()
-            itemView.setOnClickListener { cliclListener(conta) }
-
+            itemView.item_conta_apelido.text = contaSelecionada.apelido
+            itemView.item_conta_textview_agencia.text = contaSelecionada.agencia
+            itemView.item_conta_textview_numero_conta.text = contaSelecionada.numeroConta
+            itemView.item_conta_textview_saldo.text = contaSelecionada.saldo.formataMoedaParaBrasileiro()
+            itemView.setOnClickListener { cliclListener(contaSelecionada) }
+            itemView.setOnLongClickListener{ longClickListener(contaSelecionada) }
         }
 
     }
