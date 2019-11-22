@@ -3,4 +3,15 @@
     <string name="action_settings">Remover</string>
     <string name="saldo_total_layout">Saldo total</string>
     <string name="saldo_total_valor">R$ 9.000.000.000,00</string>
+    <string name="saldo_layout">SALDO</string>
+    <string name="saldo_valor">R$ 1.000,00</string>
+    <string name="nome_do_titular_layout">Nome do titular</string>
+    <string name="apelido_da_conta_layout">Apelido da conta</string>
+    <string name="agencia_layout">Agência</string>
+    <string name="conta_layout">Conta</string>
+    <string name="titular_nome">Robson L. Medeiros</string>
+    <string name="apelido_conta">Itaú</string>
+    <string name="agencia_numero">0000</string>
+    <string name="numero_conta">00000-0</string>
+    <string name="data_de_layout">De</string>
 </resources>

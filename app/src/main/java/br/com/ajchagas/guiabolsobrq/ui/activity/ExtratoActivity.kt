@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import br.com.ajchagas.guiabolsobrq.R
+import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
 import br.com.ajchagas.guiabolsobrq.extension.formataParaBrasileiro
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.model.TipoTransacao
@@ -25,7 +26,10 @@ class ExtratoActivity : AppCompatActivity() {
         configuraDatePickerDialog()
 
         val conta = intent.getSerializableExtra("conta") as Conta
+        extrato_textview_saldo_total.text = conta.saldo.formataMoedaParaBrasileiro()
         extrato_textview_nome_banco.text = conta.apelido
+        extrato_textview_numero_agencia.text = conta.agencia
+        extrato_textview_numero_conta.text = conta.numeroConta
 
         val listaTransacoes: MutableList<Transacao> = configuraListaTransacoes()
         configuraRecyclerView(listaTransacoes)
