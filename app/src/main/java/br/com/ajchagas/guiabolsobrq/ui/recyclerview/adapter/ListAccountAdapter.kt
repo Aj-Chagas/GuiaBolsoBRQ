@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.ajchagas.guiabolsobrq.R
+import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import kotlinx.android.synthetic.main.item_conta.view.*
 
 class ListAccountAdapter(
-    private val contas: MutableList<Conta>,
-    private val context: Context
+    private val contas: MutableList<Conta> = mutableListOf(),
+    private val context: Context,
+    val clickListener: (Conta) -> Unit = {},
+    val longClickListener: (Conta) -> Boolean = {false}
 ) : RecyclerView.Adapter<ListAccountAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,26 +28,27 @@ class ListAccountAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val conta = contas[position]
+        val contaSeleccionada = contas[position]
 
-        holder.bindView(conta)
+        holder.bindView(contaSeleccionada, clickListener, longClickListener)
 
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
 
-        fun bindView(conta: Conta) {
+        fun bindView(
+            contaSelecionada: Conta,
+            cliclListener: (Conta) -> Unit,
+            longClickListener: (Conta) -> Boolean
+        ) {
 
-            val apelido = itemView.item_conta_apelido
-            val agencia = itemView.item_conta_textview_agencia
-            val numeroConta = itemView.item_conta_textview_numero_conta
-            val saldo = itemView.item_conta_textview_saldo
-
-            apelido.text = conta.apelido
-            agencia.text = conta.agencia
-            numeroConta.text = conta.numeroConta
-            saldo.text = conta.saldo.toString()
+            itemView.item_conta_apelido.text = contaSelecionada.apelido
+            itemView.item_conta_textview_agencia.text = contaSelecionada.agencia
+            itemView.item_conta_textview_numero_conta.text = contaSelecionada.numeroConta
+            itemView.item_conta_textview_saldo.text = contaSelecionada.saldo.formataMoedaParaBrasileiro()
+            itemView.setOnClickListener { cliclListener(contaSelecionada) }
+            itemView.setOnLongClickListener{ longClickListener(contaSelecionada) }
         }
 
     }

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.activity.ExtratoActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+
+    <TextView
+        android:id="@+id/extrato_textview_saldo_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="SALDO"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/extrato_textview_saldo_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="R$ 1.000,00"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_saldo_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_nome_titular_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:text="Nome do titular"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_saldo_total" />
+
+    <TextView
+        android:id="@+id/extrato_textview_apelido_conta_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Apelido da conta"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_titular_layout"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_nome_titular_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_agencia_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Agência"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_apelido_conta_layout"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_apelido_conta_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_conta_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Conta"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_agencia_layout"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_agencia_layout" />
+
+    <TextView
+        android:id="@+id/extrato_textview_nome_titular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="Robson Leonel Medeiros"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_nome_titular_layout"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/extrato_textview_nome_banco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Itaú"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_apelido_conta_layout"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_titular" />
+
+    <TextView
+        android:id="@+id/extrato_textview_numero_agencia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0000"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_agencia_layout"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_banco" />
+
+    <TextView
+        android:id="@+id/extrato_textview_numero_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00000-0"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_conta_layout"
+        app:layout_constraintStart_toStartOf="@+id/extrato_textview_numero_agencia" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/extrato_textview_conta_layout">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/extrato_textview_de_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="De"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/extrato_edittext_input_data_de"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/extrato_edittext_input_data_de"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/11/2019"
+                android:focusable="false"
+                app:layout_constraintStart_toEndOf="@id/extrato_textview_de_layout"
+                app:layout_constraintEnd_toStartOf="@id/extrato_textview_ate_layout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/extrato_textview_ate_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Até"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@id/extrato_edittext_input_data_ate"
+                app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_de_layout"
+                app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_de" />
+
+            <EditText
+                android:id="@+id/extrato_edittext_input_data_ate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/11/2019"
+                android:focusable="false"
+                app:layout_constraintStart_toEndOf="@+id/extrato_textview_ate_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include layout="@layout/recyclerview_list_transacoes"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

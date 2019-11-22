@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.CadastroContaActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+
+    <ImageView
+        android:id="@+id/cadastro_imageview_icon_add_person"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_person_add_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Dados para cadastro"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/cadastro_imageview_icon_add_person"
+        app:layout_constraintBottom_toBottomOf="@id/cadastro_imageview_icon_add_person" />
+
+
+    <Spinner
+        android:id="@+id/cadastro_spinner_bancos"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_margin="16dp"
+        style="@android:style/Widget.Holo.Light.Spinner"
+        android:padding="10dp"
+        android:paddingLeft="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_imageview_icon_add_person"
+        app:layout_constraintStart_toStartOf="@+id/cadastro_imageview_icon_add_person" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_apelido_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColorHint="@color/hint"
+        app:layout_constraintStart_toStartOf="@id/cadastro_spinner_bancos"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_spinner_bancos">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cadastro_edit_text_apelido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:maxLength="20"
+            android:padding="10dp"
+            android:paddingLeft="4dp"
+            android:hint="Apelido da conta"
+            android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_nome_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLength="25"
+        android:textColorHint="@color/hint"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_textview_apelido_layout"
+        app:layout_constraintStart_toStartOf="@id/cadastro_textview_apelido_layout"
+        app:layout_constraintEnd_toEndOf="@id/cadastro_textview_apelido_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:paddingLeft="4dp"
+            android:hint="Nome do titular" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_agencia_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/hint"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_textview_nome_layout"
+        app:layout_constraintStart_toStartOf="@id/cadastro_textview_nome_layout"
+        app:layout_constraintEnd_toEndOf="@id/cadastro_textview_nome_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="4"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:paddingLeft="4dp"
+            android:hint="Agência" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cadastro_textview_conta_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/hint"
+        app:layout_constraintTop_toBottomOf="@id/cadastro_textview_agencia_layout"
+        app:layout_constraintStart_toStartOf="@id/cadastro_textview_agencia_layout"
+        app:layout_constraintEnd_toEndOf="@id/cadastro_textview_agencia_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="6"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:paddingLeft="4dp"
+            android:hint="Conta" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/cadastro_botao_Salvar"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:background="@drawable/botao_arredondado_laranja"
+        android:text="SALVAR"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_textview_conta_layout"
+        app:layout_constraintEnd_toEndOf="@+id/cadastro_textview_conta_layout"
+        app:layout_constraintStart_toStartOf="@+id/cadastro_textview_conta_layout"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="381dp" />
+
+    <Button
+        android:id="@+id/cadastro_botao_cancelar"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:text="CANCELAR"
+        android:elevation="20dp"
+        android:background="@drawable/botao_arredondado_branco"
+        app:layout_constraintEnd_toEndOf="@+id/cadastro_botao_Salvar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/cadastro_botao_Salvar"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_botao_Salvar" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
