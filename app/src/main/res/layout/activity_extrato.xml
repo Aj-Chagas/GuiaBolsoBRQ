@@ -159,8 +159,7 @@
                 android:focusable="false"
                 app:layout_constraintStart_toEndOf="@id/extrato_textview_de_layout"
                 app:layout_constraintEnd_toStartOf="@id/extrato_textview_ate_layout"
-                app:layout_constraintTop_toTopOf="parent"
-                android:inputType="TODO" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/extrato_textview_ate_layout"
