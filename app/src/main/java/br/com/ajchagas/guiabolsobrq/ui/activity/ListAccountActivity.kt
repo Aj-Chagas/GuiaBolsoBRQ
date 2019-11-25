@@ -43,20 +43,8 @@ class ListAccountActivity : AppCompatActivity() {
             val vaiParaExtrato = Intent(this, ExtratoActivity::class.java)
             vaiParaExtrato.putExtra("conta", contaClicada)
             startActivity(vaiParaExtrato)
-
-        }, longClickListener = {
-            var alertDialog = AlertDialog.Builder(this)
-            alertDialog.setTitle("Remover")
-            alertDialog.setMessage("Deseja remover esta conta ?")
-            alertDialog.setPositiveButton("Sim") { _, _ ->
-                Toast.makeText(this, "Sim", Toast.LENGTH_LONG).show()
-            }
-            alertDialog.setNegativeButton("Não") { _, _ ->
-                Toast.makeText(this, "Não", Toast.LENGTH_LONG).show()
-            }
-            alertDialog.show()
-            true
         })
+
         list_account_recyclerview.adapter = adapter
     }
 
