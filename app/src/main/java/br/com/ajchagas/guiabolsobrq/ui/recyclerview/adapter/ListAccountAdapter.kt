@@ -1,10 +1,9 @@
 package br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter
 
 import android.content.Context
-import android.view.ContextMenu
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
@@ -15,7 +14,7 @@ class ListAccountAdapter(
     private val contas: MutableList<Conta> = mutableListOf(),
     private val context: Context,
     val clickListener: (Conta) -> Unit = {}
-) : RecyclerView.Adapter<ListAccountAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<ListAccountAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewCriada = LayoutInflater.from(context)
@@ -33,26 +32,15 @@ class ListAccountAdapter(
         holder.bindView(contaSeleccionada, clickListener)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnCreateContextMenuListener{
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnCreateContextMenuListener {
         override fun onCreateContextMenu(
             menu: ContextMenu?,
             v: View?,
             menuInfo: ContextMenu.ContextMenuInfo?
         ) {
-            menu?.add("Remover")
 
-//            var alertDialog = AlertDialog.Builder(this)
-//            alertDialog.setTitle("Remover")
-//            alertDialog.setMessage("Deseja remover esta conta ?")
-//            alertDialog.setPositiveButton("Sim") { _, _ ->
-//                Toast.makeText(this, "Sim", Toast.LENGTH_LONG).show()
-//            }
-//            alertDialog.setNegativeButton("Não") { _, _ ->
-//                Toast.makeText(this, "Não", Toast.LENGTH_LONG).show()
-//            }
-//            alertDialog.show()
         }
-
 
         fun bindView(
             contaSelecionada: Conta,

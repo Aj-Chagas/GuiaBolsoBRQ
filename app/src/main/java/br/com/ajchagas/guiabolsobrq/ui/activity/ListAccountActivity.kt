@@ -1,8 +1,11 @@
 package br.com.ajchagas.guiabolsobrq.ui.activity
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -44,8 +47,8 @@ class ListAccountActivity : AppCompatActivity() {
             vaiParaExtrato.putExtra("conta", contaClicada)
             startActivity(vaiParaExtrato)
         })
-
         list_account_recyclerview.adapter = adapter
+        registerForContextMenu(list_account_recyclerview)
     }
 
     private fun listaContasParaTeste() {
@@ -111,4 +114,27 @@ class ListAccountActivity : AppCompatActivity() {
         startActivity(vaiParaActivityCadastroConta)
     }
 
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        var alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("Remover")
+        alertDialog.setMessage("Deseja remover esta conta ?")
+        alertDialog.setPositiveButton("Sim") { _, _ ->
+            Toast.makeText(this, "Sim", Toast.LENGTH_LONG).show()
+        }
+        alertDialog.setNegativeButton("Não") { _, _ ->
+            Toast.makeText(this, "Não", Toast.LENGTH_LONG).show()
+        }
+        alertDialog.show()
+        return false
+    }
 }
