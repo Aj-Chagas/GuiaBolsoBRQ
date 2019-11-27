@@ -54,45 +54,53 @@ class ListAccountActivity : AppCompatActivity() {
     private fun listaContasParaTeste() {
         val listaDeContas = mutableListOf<Conta>(
             Conta(
+                idBanco = 1,
                 apelido = "Itaú",
                 agencia = "1220",
                 numeroConta = "23177-5",
                 saldo = BigDecimal(53957.33)
             ), Conta(
+                idBanco = 1,
                 apelido = "Santander",
                 agencia = "1320",
                 numeroConta = "10000-5",
                 saldo = BigDecimal(9875.29)
             ),
             Conta(
+                idBanco = 1,
                 apelido = "Nubank",
                 agencia = "0001",
                 numeroConta = "10320-5",
                 saldo = BigDecimal(75432.19)
             ),
             Conta(
+                idBanco = 1,
                 apelido = "Itaú",
                 agencia = "1220",
                 numeroConta = "23177-5",
                 saldo = BigDecimal(42500.00)
             ), Conta(
+                idBanco = 1,
                 apelido = "Itaú",
                 agencia = "1220",
                 numeroConta = "23177-5",
                 saldo = BigDecimal(53957.33)
             ), Conta(
+                idBanco = 1,
                 apelido = "Santander",
                 agencia = "1320",
                 numeroConta = "10000-5",
                 saldo = BigDecimal(9875.29)
             ),
             Conta(
+                idBanco = 1,
                 apelido = "Nubank",
                 agencia = "0001",
                 numeroConta = "10320-5",
                 saldo = BigDecimal(75432.19)
             ),
             Conta(
+                idBanco = 1,
                 apelido = "Itaú",
                 agencia = "1220",
                 numeroConta = "23177-5",
