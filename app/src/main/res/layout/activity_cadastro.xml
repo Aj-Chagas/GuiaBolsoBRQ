@@ -76,6 +76,7 @@
         app:layout_constraintEnd_toEndOf="@id/cadastro_textview_apelido_layout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cadastro_edit_text_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
@@ -95,6 +96,7 @@
         app:layout_constraintEnd_toEndOf="@id/cadastro_textview_nome_layout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cadastro_edit_text_agencia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -115,6 +117,7 @@
         app:layout_constraintEnd_toEndOf="@id/cadastro_textview_agencia_layout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cadastro_edit_text_conta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"

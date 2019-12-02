@@ -1,4 +1,4 @@
-package br.com.ajchagas.guiabolsobrq.model
+package br.com.ajchagas.guiabolsobrq.model.listaBancoApi
 
 import com.google.gson.annotations.SerializedName
 

@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.ajchagas.guiabolsobrq.R
+import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
 import br.com.ajchagas.guiabolsobrq.model.TipoTransacao
-import br.com.ajchagas.guiabolsobrq.model.Transacao
+import br.com.ajchagas.guiabolsobrq.model.listaExtratoApi.Data
 import kotlinx.android.synthetic.main.extrato_item_transacao.view.*
 
 class ListTransacoesAdapter(
-    private val listaTransacoes: MutableList<Transacao>,
+    private val listaTransacoes: MutableList<Data> = mutableListOf(),
     private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
@@ -29,22 +30,28 @@ class ListTransacoesAdapter(
         holder.bindView(transacao)
     }
 
+    fun atualiza(transacoes: List<Data>) {
+        notifyItemRangeRemoved(0, this.listaTransacoes.size)
+        this.listaTransacoes.clear()
+        this.listaTransacoes.addAll(transacoes)
+        notifyItemRangeInserted(0, this.listaTransacoes.size)
+    }
+
+
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView)
 
-    fun RecyclerView.ViewHolder.bindView(transacao: Transacao) {
+    fun RecyclerView.ViewHolder.bindView(transacao: Data) {
         val nome = itemView.list_transacoes_nome_transacao
         val data = itemView.list_transacoes_data_transacao
         val valor= itemView.list_transacoes_valor_transacao
 
-        nome.text = transacao.nome
-        data.text = transacao.data
-        if(transacao.tipo == TipoTransacao.Credito){
-            valor.text = transacao.valor
+        nome.text = transacao.lancamento
+        data.text = transacao.data_criacao
+        if(transacao.tipo_operacao == "C"){
+            valor.text = transacao.valor.formataMoedaParaBrasileiro()
         }else{
-            valor.text = "- " + transacao.valor
+            valor.text = "- " + transacao.valor.formataMoedaParaBrasileiro()
         }
-
-
     }
 
 }

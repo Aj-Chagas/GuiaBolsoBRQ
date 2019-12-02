@@ -10,10 +10,14 @@ import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import kotlinx.android.synthetic.main.item_conta.view.*
 
+
+
+
 class ListAccountAdapter(
     private val contas: MutableList<Conta> = mutableListOf(),
     private val context: Context,
-    val clickListener: (Conta) -> Unit = {}
+    var clickListener: (Conta) -> Unit = {},
+    var clickLongLister : (Conta) -> Boolean = {false}
 ) : RecyclerView.Adapter<ListAccountAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,22 +33,36 @@ class ListAccountAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contaSeleccionada = contas[position]
 
-        holder.bindView(contaSeleccionada, clickListener)
+        holder.bindView(contaSeleccionada, clickListener, clickLongLister)
+    }
+
+    fun atualiza(contas: List<Conta>) {
+        notifyItemRangeRemoved(0, this.contas.size)
+        this.contas.clear()
+        this.contas.addAll(contas)
+        notifyItemRangeInserted(0, this.contas.size)
+    }
+
+    fun getItem(position: Int): Conta {
+        return contas[position]
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnCreateContextMenuListener {
+        View.OnCreateContextMenuListener{
+
         override fun onCreateContextMenu(
             menu: ContextMenu?,
             v: View?,
             menuInfo: ContextMenu.ContextMenuInfo?
         ) {
 
+
         }
 
         fun bindView(
             contaSelecionada: Conta,
-            cliclListener: (Conta) -> Unit
+            cliclListener: (Conta) -> Unit,
+            clickLongLister : (Conta) -> Boolean
         ) {
 
             itemView.item_conta_apelido.text = contaSelecionada.apelido
@@ -52,8 +70,11 @@ class ListAccountAdapter(
             itemView.item_conta_textview_numero_conta.text = contaSelecionada.numeroConta
             itemView.item_conta_textview_saldo.text = contaSelecionada.saldo.formataMoedaParaBrasileiro()
             itemView.setOnClickListener { cliclListener(contaSelecionada) }
+            itemView.setOnLongClickListener { clickLongLister(contaSelecionada) }
             itemView.setOnCreateContextMenuListener(this)
         }
+
+
     }
 
 }
