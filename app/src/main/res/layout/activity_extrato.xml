@@ -142,34 +142,39 @@
                 android:id="@+id/extrato_textview_de_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/data_de_layout"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="extrato_edittext_input_data_de"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/extrato_edittext_input_data_de"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/extrato_edittext_input_data_de"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="01/11/2019"
+                android:layout_width="110dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="99dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
                 android:focusable="false"
-                app:layout_constraintStart_toEndOf="@id/extrato_textview_de_layout"
-                app:layout_constraintEnd_toStartOf="@id/extrato_textview_ate_layout"
+                android:text="01/11/2019"
+                app:layout_constraintEnd_toStartOf="@+id/extrato_textview_ate_layout"
+                app:layout_constraintStart_toEndOf="@+id/extrato_textview_de_layout"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/extrato_textview_ate_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Até"
+                android:layout_marginStart="40dp"
                 android:fontFamily="@font/roboto_medium"
+                android:text="Até"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@id/extrato_edittext_input_data_ate"
+                app:layout_constraintEnd_toEndOf="extrato_edittext_input_data_ate"
                 app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_de_layout"
                 app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_de" />
 
@@ -177,13 +182,34 @@
                 android:id="@+id/extrato_edittext_input_data_ate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="01/11/2019"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
                 android:focusable="false"
+                android:text="01/11/2019"
+                app:layout_constraintBottom_toBottomOf="@+id/extrato_edittext_input_data_de"
                 app:layout_constraintStart_toEndOf="@+id/extrato_textview_ate_layout"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <include layout="@layout/recyclerview_list_transacoes"/>
+            <Button
+                android:id="@+id/extrato_button_seach"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/ic_search_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/extrato_edittext_input_data_ate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_ate"
+                app:layout_constraintTop_toTopOf="@+id/extrato_edittext_input_data_ate"
+                app:layout_constraintVertical_bias="0.38" />
+
+            <!--                          <include
+                                          android:id="@+id/include"
+                                          layout="@layout/recyclerview_list_transacoes"
+                                          app:layout_constraintBottom_toBottomOf="parent"
+                                          app:layout_constraintEnd_toEndOf="parent"
+                                          app:layout_constraintHorizontal_bias="0.0"
+                                          app:layout_constraintStart_toStartOf="parent"
+                                          app:layout_constraintTop_toTopOf="parent" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -51,7 +51,6 @@ class CadastroContaActivity : AppCompatActivity() {
         validaCamposPreenchido()
         configuraBotaoSalvar()
         configuraBotaoCancelar()
-
     }
 
     private fun buscaListaBancos() {
@@ -82,7 +81,13 @@ class CadastroContaActivity : AppCompatActivity() {
                 val agencia = cadastro_edit_text_agencia.text.toString()
                 val conta = cadastro_edit_text_conta.text.toString()
 
-                salva(Conta(contaId, idDoBancoSelecionado.toInt(), titular, apelido, agencia, conta))
+                salva(Conta
+                    (contaId,
+                    idDoBancoSelecionado.toInt(),
+                    titular,
+                    apelido,
+                    agencia,
+                    conta))
             }
         }
     }
@@ -158,7 +163,7 @@ class CadastroContaActivity : AppCompatActivity() {
     }
 
     private fun configuraAdapterSpinner(listBancos: List<Data>): ArrayAdapter<Data> {
-        return ArrayAdapter<Data>(
+        return ArrayAdapter(
             this,
             R.layout.support_simple_spinner_dropdown_item,
             listBancos

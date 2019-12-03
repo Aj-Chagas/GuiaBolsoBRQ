@@ -1,15 +1,13 @@
 package br.com.ajchagas.guiabolsobrq.ui.activity
 
-import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.database.AppDatabase
-import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
-import br.com.ajchagas.guiabolsobrq.extension.formataParaBrasileiro
+import br.com.ajchagas.guiabolsobrq.extension.*
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.repository.Repository
 import br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter.ListTransacoesAdapter
@@ -18,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_extrato.*
 import kotlinx.android.synthetic.main.recyclerview_list_transacoes.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
+
 
 class ExtratoActivity : AppCompatActivity() {
 
@@ -37,21 +36,40 @@ class ExtratoActivity : AppCompatActivity() {
 
         configuraToolBar()
 
-        val conta = intent.getSerializableExtra("conta") as Conta
+        val conta = DeserializacaoDaConta()
+        bindViewConta(conta)
+        configuraDatePickerDialog()
+        configuraRecyclerView()
+        buscaExtrato(conta, GregorianCalendar().formataParayyyyMMdd(), GregorianCalendar().ultimos30Dias().formataParayyyyMMdd())
+    }
+
+    private fun bindViewConta(conta: Conta) {
         extrato_textview_nome_banco.text = conta.apelido
         extrato_textview_nome_titular.text = conta.titular
         extrato_textview_numero_agencia.text = conta.agencia
         extrato_textview_numero_conta.text = conta.numeroConta
         extrato_textview_saldo_total.text = conta.saldo.formataMoedaParaBrasileiro()
+    }
 
-        configuraDatePickerDialog()
-        configuraRecyclerView()
+    private fun DeserializacaoDaConta() = intent.getSerializableExtra("conta") as Conta
 
-        viewModel.buscaExtrato(conta).observe(this, androidx.lifecycle.Observer {
-            Toast.makeText(this, "Evento recebido com sucesso", Toast.LENGTH_LONG).show()
-            it?.dado?.let {Extrato ->
-                val listaDeTransacoes = Extrato.data
-                adapter.atualiza(listaDeTransacoes)
+    private fun buscaExtrato(conta: Conta, dataInicio : String, dataFim : String ) {
+        list_transacoes_progressBar.visibility = View.VISIBLE
+
+        viewModel.buscaExtrato(conta, dataInicio, dataFim).observe(this, androidx.lifecycle.Observer  {
+
+            list_transacoes_progressBar.visibility = View.GONE
+
+            it?.dado?.let { Extrato ->
+
+                if(Extrato.data.isNotEmpty()){
+                    adapter.atualiza(Extrato.data)
+                }else{
+                    list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.VISIBLE
+                }
+            }
+            it?.erro?.let{
+                mostraErro("Verifique a conexão com a internet")
             }
         })
     }
@@ -59,8 +77,8 @@ class ExtratoActivity : AppCompatActivity() {
     private fun configuraDatePickerDialog() {
         val dataDe = extrato_edittext_input_data_de
         val dataAte = extrato_edittext_input_data_ate
-        configuraCampoData(dataDe)
-        configuraCampoData(dataAte)
+        configuraCampoData(dataDe, GregorianCalendar().ultimos30Dias())
+        configuraCampoData(dataAte, GregorianCalendar())
     }
 
     private fun configuraRecyclerView() {
@@ -80,8 +98,7 @@ class ExtratoActivity : AppCompatActivity() {
         return true
     }
 
-    private fun configuraCampoData(campoData : EditText) {
-        val hoje = Calendar.getInstance()
+    private fun configuraCampoData(campoData : EditText, hoje : Calendar) {
 
         val ano = hoje.get(Calendar.YEAR)
         val mes = hoje.get(Calendar.MONTH)
@@ -89,14 +106,8 @@ class ExtratoActivity : AppCompatActivity() {
 
         campoData.setText(hoje.formataParaBrasileiro())
         campoData.setOnClickListener {
-            DatePickerDialog(this,
-                { _, ano, mes, dia ->
-                    val dataSelecionada = Calendar.getInstance()
-                    dataSelecionada.set(ano, mes, dia)
-                    campoData.setText(dataSelecionada.formataParaBrasileiro())
-                }
-                , ano, mes, dia)
-                .show()
+
+            dataPicker(campoData, ano, mes, dia)
         }
     }
 }

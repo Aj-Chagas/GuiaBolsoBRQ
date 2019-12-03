@@ -12,11 +12,16 @@ class ExtratoViewModel(
     private val repository: Repository
 ) : ViewModel() {
 
-    fun buscaExtrato(conta: Conta) : LiveData<Resource<Extrato?>?>{
-        return repository.buscaExtratoNaApi()
-    }
-
     companion object {
         val FACTORY = singleArgViewModelFactory(::ExtratoViewModel)
     }
+
+    fun buscaExtrato(
+        conta: Conta,
+        dataAtual: String,
+        ultimos30Dias: String
+    ) : LiveData<Resource<Extrato?>?>{
+        return repository.buscaExtratoNaApi(conta, dataAtual, ultimos30Dias)
+    }
+
 }

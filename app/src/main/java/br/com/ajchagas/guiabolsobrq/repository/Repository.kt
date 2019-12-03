@@ -54,17 +54,20 @@ class Repository(
         }
     }
 
-    fun buscaExtratoNaApi(): LiveData<Resource<Extrato?>?> {
+    fun buscaExtratoNaApi(
+        conta: Conta,
+        dataAtual: String,
+        ultimos30Dias: String
+    ): LiveData<Resource<Extrato?>?> {
         return MutableLiveData<Resource<Extrato?>?>().also { liveData ->
             CoroutineScope(Dispatchers.IO).launch {
                 val resource : Resource<Extrato?>? = try {
-                    Resource(dado = webClient.listaExtrato())
+                    Resource(dado = webClient.listaExtrato(conta, dataAtual, ultimos30Dias))
                 }catch (e : IOException){
                     Resource(dado = null, erro = e.message)
                 }
                 liveData.postValue(resource)
             }
         }
-
     }
 }

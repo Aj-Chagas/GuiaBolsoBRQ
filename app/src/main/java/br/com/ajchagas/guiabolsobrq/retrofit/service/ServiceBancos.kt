@@ -4,13 +4,19 @@ import br.com.ajchagas.guiabolsobrq.model.listaBancoApi.Banco
 import br.com.ajchagas.guiabolsobrq.model.listaExtratoApi.Extrato
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ServiceBancos {
 
     @GET("estagio/trabalho/bancos")
     fun getListaBancos() : Call<Banco?>
 
-    @GET("estagio/trabalho/bancos/6/extrato/20191001/20191130")
-    fun getExtrato() : Call<Extrato?>
+
+    @GET("estagio/trabalho/bancos/{id}/extrato/{dataFinal}/{dataAtual}")
+    fun getExtrato(
+    @Path("id") id: Int?,
+    @Path("dataAtual") dataAtual: String,
+    @Path("dataFinal") ultimos30Dias: String
+) : Call<Extrato?>
 
 }

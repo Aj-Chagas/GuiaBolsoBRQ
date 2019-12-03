@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.item_conta.view.*
 class ListAccountAdapter(
     private val contas: MutableList<Conta> = mutableListOf(),
     private val context: Context,
-    var clickListener: (Conta) -> Unit = {},
-    var clickLongLister : (Conta) -> Boolean = {false}
+    var clickListener: (Conta) -> Unit = {}
+
 ) : RecyclerView.Adapter<ListAccountAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,8 +32,7 @@ class ListAccountAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contaSeleccionada = contas[position]
-
-        holder.bindView(contaSeleccionada, clickListener, clickLongLister)
+        holder.bindView(contaSeleccionada, clickListener)
     }
 
     fun atualiza(contas: List<Conta>) {
@@ -56,13 +55,14 @@ class ListAccountAdapter(
             menuInfo: ContextMenu.ContextMenuInfo?
         ) {
 
-
+            menu?.setHeaderTitle("Escolha uma ação: ");
+            menu?.add(0, v!!.id, adapterPosition, "Remover")
         }
 
         fun bindView(
             contaSelecionada: Conta,
-            cliclListener: (Conta) -> Unit,
-            clickLongLister : (Conta) -> Boolean
+            cliclListener: (Conta) -> Unit
+
         ) {
 
             itemView.item_conta_apelido.text = contaSelecionada.apelido
@@ -70,9 +70,10 @@ class ListAccountAdapter(
             itemView.item_conta_textview_numero_conta.text = contaSelecionada.numeroConta
             itemView.item_conta_textview_saldo.text = contaSelecionada.saldo.formataMoedaParaBrasileiro()
             itemView.setOnClickListener { cliclListener(contaSelecionada) }
-            itemView.setOnLongClickListener { clickLongLister(contaSelecionada) }
             itemView.setOnCreateContextMenuListener(this)
+
         }
+
 
 
     }
