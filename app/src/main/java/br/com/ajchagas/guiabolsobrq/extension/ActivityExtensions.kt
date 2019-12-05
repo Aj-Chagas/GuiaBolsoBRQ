@@ -19,7 +19,7 @@ fun Activity.dataPicker(editText : EditText, ano : Int, mes : Int, dia : Int){
         { _, ano, mes, dia ->
             val dataSelecionada = Calendar.getInstance()
             dataSelecionada.set(ano, mes, dia)
-            editText.setText(dataSelecionada.formataParaBrasileiro())
+            editText.setText(dataSelecionada.formataPara("yyyyMMdd"))
         }
         , ano, mes, dia)
         .show()

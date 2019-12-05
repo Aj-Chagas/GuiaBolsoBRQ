@@ -2,11 +2,13 @@ package br.com.ajchagas.guiabolsobrq.extension
 
 import java.text.SimpleDateFormat
 import java.util.*
-
-fun Calendar.formataParaBrasileiro() : String{
-    val formatoBrasileiro = "dd/MM/yyyy"
-    val format = SimpleDateFormat(formatoBrasileiro)
+//"dd-MMM"
+fun Calendar.formataPara(formato : String) : String{
+    val format = SimpleDateFormat(formato)
     return format.format(this.time)
+<<<<<<< Updated upstream
+}
+=======
 }
 
 fun Calendar.ultimos30Dias(): Calendar {
@@ -14,8 +16,5 @@ fun Calendar.ultimos30Dias(): Calendar {
     return this
 }
 
-fun Calendar.formataParayyyyMMdd() : String{
-    val formatoBrasileiro = "yyyyMMdd"
-    val format = SimpleDateFormat(formatoBrasileiro)
-    return format.format(this.time)
-}
+
+>>>>>>> Stashed changes

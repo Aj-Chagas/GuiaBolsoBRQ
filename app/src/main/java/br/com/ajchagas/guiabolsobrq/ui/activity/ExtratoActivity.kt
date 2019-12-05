@@ -39,9 +39,12 @@ class ExtratoActivity : AppCompatActivity() {
         val conta = DeserializacaoDaConta()
         bindViewConta(conta)
         configuraDatePickerDialog()
+<<<<<<< Updated upstream
+=======
         configuraRecyclerView()
-        buscaExtrato(conta, GregorianCalendar().formataParayyyyMMdd(), GregorianCalendar().ultimos30Dias().formataParayyyyMMdd())
+        buscaExtrato(conta, GregorianCalendar().formataPara("yyyyMMdd"), GregorianCalendar().ultimos30Dias().formataPara("yyyyMMdd"))
     }
+>>>>>>> Stashed changes
 
     private fun bindViewConta(conta: Conta) {
         extrato_textview_nome_banco.text = conta.apelido
@@ -104,7 +107,7 @@ class ExtratoActivity : AppCompatActivity() {
         val mes = hoje.get(Calendar.MONTH)
         val dia = hoje.get(Calendar.DAY_OF_MONTH)
 
-        campoData.setText(hoje.formataParaBrasileiro())
+        campoData.setText(hoje.formataPara("dd/MM/yyyy"))
         campoData.setOnClickListener {
 
             dataPicker(campoData, ano, mes, dia)

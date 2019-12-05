@@ -188,28 +188,31 @@
                 android:text="01/11/2019"
                 app:layout_constraintBottom_toBottomOf="@+id/extrato_edittext_input_data_de"
                 app:layout_constraintStart_toEndOf="@+id/extrato_textview_ate_layout"
+<<<<<<< Updated upstream
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include layout="@layout/recyclerview_list_transacoes"/>
+=======
+                app:layout_constraintEnd_toStartOf="@+id/teste"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/extrato_button_seach"
+                android:id="@+id/teste"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/ic_search_black_24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/extrato_edittext_input_data_ate"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_ate"
-                app:layout_constraintTop_toTopOf="@+id/extrato_edittext_input_data_ate"
-                app:layout_constraintVertical_bias="0.38" />
+                android:background="@drawable/ic_search_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_de_layout"
+                app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_ate" />
 
-            <!--                          <include
-                                          android:id="@+id/include"
-                                          layout="@layout/recyclerview_list_transacoes"
-                                          app:layout_constraintBottom_toBottomOf="parent"
-                                          app:layout_constraintEnd_toEndOf="parent"
-                                          app:layout_constraintHorizontal_bias="0.0"
-                                          app:layout_constraintStart_toStartOf="parent"
-                                          app:layout_constraintTop_toTopOf="parent" />-->
+            <include
+                android:id="@+id/include"
+                layout="@layout/recyclerview_list_transacoes" />
+>>>>>>> Stashed changes
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
