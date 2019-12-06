@@ -11,7 +11,7 @@ data class Conta(
     val id : Int = 0,
     val idBanco  : Int,
     val titular: String,
-    val apelido : String,
+    var apelido : String,
     val agencia : String,
     val numeroConta  : String,
     val saldo : BigDecimal = BigDecimal(0.0)) : Serializable

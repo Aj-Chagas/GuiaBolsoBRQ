@@ -70,4 +70,10 @@ class Repository(
             }
         }
     }
+
+    fun edita(conta: Conta) {
+        CoroutineScope(Dispatchers.IO).launch {
+            dao.edita(conta)
+        }
+    }
 }

@@ -20,4 +20,7 @@ interface ContaDAO {
     @Delete
     fun delete(conta : Conta)
 
+    @Insert(onConflict = REPLACE)
+    fun edita(conta: Conta)
+
 }

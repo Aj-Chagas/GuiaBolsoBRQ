@@ -36,4 +36,9 @@ class ListaContaViewModel(
     fun remove(conta: Conta) {
         return repository.deleta(conta)
     }
+
+    fun edita(conta: Conta) {
+        return repository.edita(conta)
+
+    }
 }

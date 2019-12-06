@@ -57,6 +57,7 @@ class ListAccountAdapter(
 
             menu?.setHeaderTitle("Escolha uma ação: ");
             menu?.add(0, v!!.id, adapterPosition, "Remover")
+            menu?.add(1, v!!.id, adapterPosition, "Editar apelido")
         }
 
         fun bindView(

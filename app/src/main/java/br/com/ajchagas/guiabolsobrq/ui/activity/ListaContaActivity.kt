@@ -2,19 +2,21 @@ package br.com.ajchagas.guiabolsobrq.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.database.AppDatabase
+import br.com.ajchagas.guiabolsobrq.extension.alert
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.repository.Repository
+import br.com.ajchagas.guiabolsobrq.ui.dialog.DialogListaContaActivity
 import br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter.ListAccountAdapter
 import br.com.ajchagas.guiabolsobrq.ui.viewmodel.ListaContaViewModel
 import kotlinx.android.synthetic.main.activity_list_account.*
+import kotlinx.android.synthetic.main.dialog_edita_apelido_conta.view.*
 import kotlinx.android.synthetic.main.recycler_view_list_account.*
 
 
@@ -38,9 +40,6 @@ class ListaContaActivity : AppCompatActivity() {
         configuraClickDoCard()
         configuraFAB()
         buscaTodasContas()
-
-
-        //somaSaldoTotal()
     }
 
     private fun buscaTodasContas() {
@@ -52,19 +51,10 @@ class ListaContaActivity : AppCompatActivity() {
         })
     }
 
-//    private fun somaSaldoTotal() {
-//        var saldo: BigDecimal = BigDecimal.ZERO
-//        for (conta: Conta in listaContas) {
-//            saldo += conta.saldo
-//        }
-//        item_saldo_total_valor.text = saldo.formataMoedaParaBrasileiro()
-//    }
-
     private fun configuraClickDoCard() {
         list_account_recyclerview.adapter = adapter
         adapter.clickListener = this::abreActivityExtrato
         registerForContextMenu(list_account_recyclerview)
-
     }
 
     private fun  abreActivityExtrato(contaClicada: Conta) {
@@ -84,26 +74,54 @@ class ListaContaActivity : AppCompatActivity() {
         startActivity(vaiParaActivityCadastroConta)
     }
 
-
     override fun onContextItemSelected(item: MenuItem): Boolean {
 
-        var alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("Remover")
-        alertDialog.setMessage("Deseja remover esta conta ?")
-        alertDialog.setPositiveButton("Sim") { _, _ ->
-
-            val position = item.order
-            val conta = adapter.getItem(position)
-            remove(conta)
-
+        if(item.groupId == 0){
+            showAlertRemoverConta(item)
+        } else{
+            showAlertEditarConta(item)
         }
-
-        alertDialog.setNegativeButton("Não") { _, _ ->
-            Toast.makeText(this, "Não", Toast.LENGTH_LONG).show()
-        }
-        alertDialog.show()
 
         return super.onContextItemSelected(item)
+    }
+
+    private fun showAlertEditarConta(item: MenuItem) {
+        val contaSelecionada = getContaSelecionada(item)
+        DialogListaContaActivity(this)
+            .criaDialogParaEditarApelido(item, contaSelecionada, acaoPositiva = { viewCriada ->
+                editaConta(viewCriada, contaSelecionada)
+            })
+    }
+
+    private fun showAlertRemoverConta(item: MenuItem) {
+        alert(title = "remover",
+            msg = "Tem certeza que deseja remover?",
+            botaoPositivo = "Sim",
+            botaoNegativo = "Não",
+            acaoBotaoPositivo = {
+                val contaSelecionada = getContaSelecionada(item)
+                remove(contaSelecionada)
+            })
+    }
+
+    private fun editaConta(
+        viewCriada: View,
+        conta: Conta
+    ) {
+        val novoApelido = viewCriada.dialog_edita_apelido_text.text
+        conta.apelido = novoApelido.toString()
+        edita(conta)
+    }
+
+    private fun edita(conta: Conta) {
+        viewmodel.edita(conta)
+    }
+
+
+    private fun getContaSelecionada(item: MenuItem) : Conta{
+        val position = item.order
+        return adapter.getItem(position)
+
     }
 
     private fun remove(conta: Conta) {
