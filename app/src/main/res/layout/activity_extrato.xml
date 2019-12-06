@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/data_de_layout"
+                android:text="De"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -180,10 +180,21 @@
                 android:text="01/11/2019"
                 android:focusable="false"
                 app:layout_constraintStart_toEndOf="@+id/extrato_textview_ate_layout"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/teste"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <Button
+                android:id="@+id/teste"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/ic_search_black_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_de_layout"
+                app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_ate" />
+
+
             <include layout="@layout/recyclerview_list_transacoes"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

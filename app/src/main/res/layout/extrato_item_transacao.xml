@@ -44,7 +44,8 @@
             android:fontFamily="@font/roboto"
             android:text="18 NOV"
             android:textColor="@android:color/darker_gray"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/list_transacoes_valor_transacao"

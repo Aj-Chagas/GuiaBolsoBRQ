@@ -8,15 +8,37 @@
     tools:context=".ui.activity.ExtratoActivity"
     tools:showIn="@layout/activity_extrato">
 
+    <ProgressBar
+        android:id="@+id/list_transacoes_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/list_transacoes_textview_msgDeDadosNaoEncontrado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"
+        android:text="Nenhum dado encontrado. "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_transacoes_progressBar"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_transacoes_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="50dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/list_transacoes_progressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
