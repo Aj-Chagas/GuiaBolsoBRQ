@@ -96,30 +96,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/apelido_conta"
-        android:textSize="16sp"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_apelido_conta_layout"
-        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_titular" />
+        app:layout_constraintEnd_toEndOf="@+id/extrato_textview_nome_titular" />
 
     <TextView
         android:id="@+id/extrato_textview_numero_agencia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/agencia_numero"
-        android:textSize="16sp"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_agencia_layout"
-        app:layout_constraintStart_toStartOf="@+id/extrato_textview_nome_banco" />
+        app:layout_constraintEnd_toEndOf="@+id/extrato_textview_nome_banco" />
 
     <TextView
         android:id="@+id/extrato_textview_numero_conta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/numero_conta"
-        android:textSize="16sp"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/extrato_textview_conta_layout"
-        app:layout_constraintStart_toStartOf="@+id/extrato_textview_numero_agencia" />
+        app:layout_constraintEnd_toEndOf="@+id/extrato_textview_numero_agencia" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
