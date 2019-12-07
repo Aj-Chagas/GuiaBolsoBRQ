@@ -11,7 +11,7 @@ import br.com.ajchagas.guiabolsobrq.model.Conta
 
 private const val NOME_BANCO_DE_DADOS = "conta.db"
 
-@Database(entities = [Conta::class], version = 2, exportSchema = false)
+@Database(entities = [Conta::class], version = 3, exportSchema = false)
 @TypeConverters(ConverterBigDecimal::class)
 abstract class AppDatabase : RoomDatabase(){
 

@@ -44,7 +44,8 @@ class ExtratoActivity : AppCompatActivity() {
     }
 
     private fun bindViewConta(conta: Conta) {
-        extrato_textview_nome_banco.text = conta.apelido
+        extrato_textview_nome_banco.text = conta.nomebanco.apenasAprimeiraLetraMaiuscula()
+        extrato_textview_nome_apelido_conta.text = conta.apelido
         extrato_textview_nome_titular.text = conta.titular
         extrato_textview_numero_agencia.text = conta.agencia
         extrato_textview_numero_conta.text = conta.numeroConta

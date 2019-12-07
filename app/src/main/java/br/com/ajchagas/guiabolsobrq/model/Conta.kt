@@ -10,6 +10,7 @@ data class Conta(
     @PrimaryKey(autoGenerate = true)
     val id : Int = 0,
     val idBanco  : Int,
+    val nomebanco: String,
     val titular: String,
     var apelido : String,
     val agencia : String,

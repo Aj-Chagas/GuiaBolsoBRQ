@@ -32,7 +32,7 @@ class CadastroContaActivity : AppCompatActivity() {
         intent.getIntExtra("contaId", 0)
     }
 
-    private var idDoBancoSelecionado by Delegates.notNull<String>()
+    private var bancoSelecionadoSpinner by Delegates.notNull<Data>()
 
 
     private val viewModel by lazy {
@@ -82,12 +82,13 @@ class CadastroContaActivity : AppCompatActivity() {
                 val conta = cadastro_edit_text_conta.text.toString()
 
                 salva(Conta
-                    (contaId,
-                    idDoBancoSelecionado.toInt(),
-                    titular,
-                    apelido,
-                    agencia,
-                    conta))
+                    (id = contaId,
+                    idBanco = bancoSelecionadoSpinner.id,
+                    nomebanco = bancoSelecionadoSpinner.nome,
+                    titular = titular,
+                    apelido = apelido,
+                    agencia = agencia,
+                    numeroConta = conta))
             }
         }
     }
@@ -155,7 +156,7 @@ class CadastroContaActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                this@CadastroContaActivity.idDoBancoSelecionado = listBancos[position].id.toString()
+                this@CadastroContaActivity.bancoSelecionadoSpinner = listBancos[position]
 
             }
 
