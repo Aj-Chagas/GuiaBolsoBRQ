@@ -40,7 +40,9 @@ class ExtratoActivity : AppCompatActivity() {
         bindViewConta(conta)
         configuraDatePickerDialog()
         configuraRecyclerView()
-        buscaExtrato(conta, GregorianCalendar().formataPara("yyyyMMdd"), GregorianCalendar().ultimos30Dias().formataPara("yyyyMMdd"))
+        buscaExtrato(conta = conta,
+            dataFim = GregorianCalendar().formataPara("yyyyMMdd"),
+            dataInicio =  GregorianCalendar().ultimos30Dias().formataPara("yyyyMMdd"))
     }
 
     private fun bindViewConta(conta: Conta) {
@@ -57,7 +59,7 @@ class ExtratoActivity : AppCompatActivity() {
     private fun buscaExtrato(conta: Conta, dataInicio : String, dataFim : String ) {
         list_transacoes_progressBar.visibility = View.VISIBLE
 
-        viewModel.buscaExtrato(conta, dataInicio, dataFim).observe(this, androidx.lifecycle.Observer  {
+        viewModel.buscaExtrato(conta, dataFim, dataInicio).observe(this, androidx.lifecycle.Observer  {
 
             list_transacoes_progressBar.visibility = View.GONE
 
