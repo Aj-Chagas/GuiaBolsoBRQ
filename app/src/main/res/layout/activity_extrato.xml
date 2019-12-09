@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.activity.ExtratoActivity"
-    tools:showIn="@layout/activity_extrato">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".ui.activity.ExtratoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/toolbar"
@@ -152,14 +150,15 @@
             app:layout_constraintEnd_toEndOf="@+id/extrato_textview_numero_agencia" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="16dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
             app:cardMaxElevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/extrato_textview_conta_layout">
 
 
@@ -222,7 +221,9 @@
                     app:layout_constraintStart_toEndOf="@+id/extrato_edittext_input_data_ate" />
 
 
-                <include layout="@layout/recyclerview_list_transacoes" />
+                <include
+                    layout="@layout/recyclerview_list_transacoes"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
