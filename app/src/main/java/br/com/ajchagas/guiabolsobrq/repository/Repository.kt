@@ -6,7 +6,7 @@ import br.com.ajchagas.guiabolsobrq.database.dao.ContaDAO
 import br.com.ajchagas.guiabolsobrq.model.listaBancoApi.Banco
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.model.listaExtratoApi.Extrato
-import br.com.ajchagas.guiabolsobrq.retrofit.webclient.BancosWebClient
+import br.com.ajchagas.guiabolsobrq.retrofit.webclient.BancoWebClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import java.io.IOException
 
 class Repository(
     private val dao: ContaDAO,
-    private val webClient : BancosWebClient = BancosWebClient()
+    private val webClient : BancoWebClient
 ){
     private val listaBancosDaApi = MutableLiveData<Resource<Banco?>?>()
 

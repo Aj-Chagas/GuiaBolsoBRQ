@@ -17,13 +17,12 @@ abstract class AppDatabase : RoomDatabase(){
 
     abstract val contaDAO: ContaDAO
 
-    companion object {
+/*    companion object {
         private lateinit var db:AppDatabase
 
         fun getInstance(context: Context) : AppDatabase {
 
             if(::db.isInitialized) return db
-
 
             db = Room.databaseBuilder(
                 context,
@@ -34,6 +33,6 @@ abstract class AppDatabase : RoomDatabase(){
                 .build()
             return db
         }
-    }
+    }*/
 
 }

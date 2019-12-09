@@ -6,7 +6,7 @@ import br.com.ajchagas.guiabolsobrq.model.listaExtratoApi.Extrato
 import br.com.ajchagas.guiabolsobrq.retrofit.ConfigRetrofit
 import br.com.ajchagas.guiabolsobrq.retrofit.service.ServiceBancos
 
-class BancosWebClient(
+class BancoWebClient(
     private val service : ServiceBancos = ConfigRetrofit().serviceBancos
 ) {
 

@@ -8,18 +8,15 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import br.com.ajchagas.guiabolsobrq.R
-import br.com.ajchagas.guiabolsobrq.database.AppDatabase
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.model.listaBancoApi.Data
-import br.com.ajchagas.guiabolsobrq.repository.Repository
 import br.com.ajchagas.guiabolsobrq.ui.viewmodel.CadastroContaActivityViewModel
-import br.com.ajchagas.guiabolsobrq.ui.viewmodel.factory.CadastroContaActivityViewModelFactory
 import br.com.ajchagas.guiabolsobrq.validator.ValidacaoPadrao
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.koin.android.ext.android.inject
 import kotlin.properties.Delegates
 
 
@@ -34,13 +31,7 @@ class CadastroContaActivity : AppCompatActivity() {
 
     private var bancoSelecionadoSpinner by Delegates.notNull<Data>()
 
-
-    private val viewModel by lazy {
-        val repository = Repository(AppDatabase.getInstance(this).contaDAO)
-        val factory = CadastroContaActivityViewModelFactory(repository)
-        val provedor = ViewModelProviders.of(this, factory)
-        provedor.get(CadastroContaActivityViewModel::class.java)
-    }
+    private val viewModel by inject<CadastroContaActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

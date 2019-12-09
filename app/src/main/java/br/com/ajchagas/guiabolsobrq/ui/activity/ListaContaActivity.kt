@@ -18,14 +18,12 @@ import br.com.ajchagas.guiabolsobrq.ui.viewmodel.ListaContaViewModel
 import kotlinx.android.synthetic.main.activity_list_account.*
 import kotlinx.android.synthetic.main.dialog_edita_apelido_conta.view.*
 import kotlinx.android.synthetic.main.recycler_view_list_account.*
+import org.koin.android.ext.android.inject
 
 
 class ListaContaActivity : AppCompatActivity() {
 
-    private val viewmodel by lazy{
-        val repository = Repository(AppDatabase.getInstance(this).contaDAO)
-        ViewModelProviders.of(this, ListaContaViewModel.FACTORY(repository)).get(ListaContaViewModel::class.java)
-    }
+    private val viewmodel by inject<ListaContaViewModel>()
 
     private val adapter by lazy {
         ListAccountAdapter(context = this)

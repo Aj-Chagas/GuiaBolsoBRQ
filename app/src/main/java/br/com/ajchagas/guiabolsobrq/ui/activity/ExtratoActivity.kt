@@ -15,20 +15,17 @@ import br.com.ajchagas.guiabolsobrq.ui.viewmodel.ExtratoViewModel
 import kotlinx.android.synthetic.main.activity_extrato.*
 import kotlinx.android.synthetic.main.recyclerview_list_transacoes.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.koin.android.ext.android.inject
 import java.util.*
 
 
 class ExtratoActivity : AppCompatActivity() {
 
-
     private val adapter by lazy {
         ListTransacoesAdapter( context = this)
     }
 
-    private val viewModel by lazy{
-        val repository = Repository(AppDatabase.getInstance(this).contaDAO)
-        ViewModelProviders.of(this, ExtratoViewModel.FACTORY(repository)).get(ExtratoViewModel::class.java)
-    }
+    private val viewModel by inject<ExtratoViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
