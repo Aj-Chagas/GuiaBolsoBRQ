@@ -46,7 +46,7 @@ class ListTransacoesAdapter(
         val valor= itemView.list_transacoes_valor_transacao
 
         nome.text = transacao.lancamento
-        data.text = transacao.data_criacao
+        data.text = transacao.data_operacao
         if(transacao.tipo_operacao == "C"){
             valor.text = transacao.valor.formataMoedaParaBrasileiro()
         }else{

@@ -3,6 +3,7 @@ package br.com.ajchagas.guiabolsobrq.ui.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import br.com.ajchagas.guiabolsobrq.R
@@ -15,10 +16,13 @@ import br.com.ajchagas.guiabolsobrq.ui.viewmodel.ExtratoViewModel
 import kotlinx.android.synthetic.main.activity_extrato.*
 import kotlinx.android.synthetic.main.recyclerview_list_transacoes.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class ExtratoActivity : AppCompatActivity() {
+
+    private lateinit var conta: Conta
 
 
     private val adapter by lazy {
@@ -36,13 +40,14 @@ class ExtratoActivity : AppCompatActivity() {
 
         configuraToolBar()
 
-        val conta = DeserializacaoDaConta()
+        conta = DeserializacaoDaConta()
         bindViewConta(conta)
         configuraDatePickerDialog()
         configuraRecyclerView()
         buscaExtrato(conta = conta,
             dataFim = GregorianCalendar().formataPara("yyyyMMdd"),
             dataInicio =  GregorianCalendar().ultimos30Dias().formataPara("yyyyMMdd"))
+
     }
 
     private fun bindViewConta(conta: Conta) {
@@ -67,7 +72,9 @@ class ExtratoActivity : AppCompatActivity() {
 
                 if(Extrato.data.isNotEmpty()){
                     adapter.atualiza(Extrato.data)
+                    list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.INVISIBLE
                 }else{
+                    adapter.atualiza(Extrato.data)
                     list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.VISIBLE
                 }
             }
@@ -82,7 +89,45 @@ class ExtratoActivity : AppCompatActivity() {
         val dataAte = extrato_edittext_input_data_ate
         configuraCampoData(dataDe, GregorianCalendar().ultimos30Dias())
         configuraCampoData(dataAte, GregorianCalendar())
+
+        teste.setOnClickListener {
+            val dataSelecionadaDe = dataDe.text.toString()
+            val dataSelecionadaAte = dataAte.text.toString()
+
+            val dataQuebradaDe: List<String> = dataSelecionadaDe.split("/")
+            val diaDe = Integer.valueOf(dataQuebradaDe[0])
+            val mesDe = Integer.valueOf(dataQuebradaDe[1])
+            val anoDe = Integer.valueOf(dataQuebradaDe[2])
+
+            val dataQuebradaAte: List<String> = dataSelecionadaAte.split("/")
+            val diaAte = Integer.valueOf(dataQuebradaAte[0])
+            val mesAte = Integer.valueOf(dataQuebradaAte[1])
+            val anoAte = Integer.valueOf(dataQuebradaAte[2])
+
+
+            val form = SimpleDateFormat("yyyy/MM/dd", Locale.US)
+            val dataSelecionadaDeDate = form.parse("${anoDe}/${mesDe}/${diaDe}") as Date
+            val dataSelecionadaDeCalendar = Calendar.getInstance()
+            dataSelecionadaDeCalendar.time = dataSelecionadaDeDate
+
+
+            val dataSelecionadaAteDate = form.parse("${anoAte}/${mesAte}/${diaAte}") as Date
+            val dataSelecionadaAteCalendar = Calendar.getInstance()
+            dataSelecionadaAteCalendar.time = dataSelecionadaAteDate
+
+
+
+            if(dataSelecionadaDeCalendar.timeInMillis <= dataSelecionadaAteCalendar.timeInMillis){
+
+                buscaExtrato(conta = conta,
+                    dataFim = "${anoAte}${mesAte}${diaAte}",
+                    dataInicio =  "${anoDe}${mesDe}${diaDe}")
+            }else{
+                Toast.makeText(this, "Data inválida", Toast.LENGTH_LONG).show()
+            }
+        }
     }
+
 
     private fun configuraRecyclerView() {
         val recyclerView = list_transacoes_recyclerview
@@ -113,4 +158,6 @@ class ExtratoActivity : AppCompatActivity() {
             dataPicker(campoData, ano, mes, dia)
         }
     }
+
+
 }
