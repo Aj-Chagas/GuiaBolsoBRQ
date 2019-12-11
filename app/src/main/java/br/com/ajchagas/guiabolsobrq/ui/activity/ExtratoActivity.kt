@@ -24,7 +24,6 @@ class ExtratoActivity : AppCompatActivity() {
 
     private lateinit var conta: Conta
 
-
     private val adapter by lazy {
         ListTransacoesAdapter( context = this)
     }
@@ -87,47 +86,43 @@ class ExtratoActivity : AppCompatActivity() {
     private fun configuraDatePickerDialog() {
         val dataDe = extrato_edittext_input_data_de
         val dataAte = extrato_edittext_input_data_ate
+
         configuraCampoData(dataDe, GregorianCalendar().ultimos30Dias())
         configuraCampoData(dataAte, GregorianCalendar())
 
         teste.setOnClickListener {
+
             val dataSelecionadaDe = dataDe.text.toString()
             val dataSelecionadaAte = dataAte.text.toString()
 
-            val dataQuebradaDe: List<String> = dataSelecionadaDe.split("/")
-            val diaDe = Integer.valueOf(dataQuebradaDe[0])
-            val mesDe = Integer.valueOf(dataQuebradaDe[1])
-            val anoDe = Integer.valueOf(dataQuebradaDe[2])
+            val dataDe = configuraData(dataSelecionadaDe)
+            val dataAte = configuraData(dataSelecionadaAte)
 
-            val dataQuebradaAte: List<String> = dataSelecionadaAte.split("/")
-            val diaAte = Integer.valueOf(dataQuebradaAte[0])
-            val mesAte = Integer.valueOf(dataQuebradaAte[1])
-            val anoAte = Integer.valueOf(dataQuebradaAte[2])
-
-
-            val form = SimpleDateFormat("yyyy/MM/dd", Locale.US)
-            val dataSelecionadaDeDate = form.parse("${anoDe}/${mesDe}/${diaDe}") as Date
-            val dataSelecionadaDeCalendar = Calendar.getInstance()
-            dataSelecionadaDeCalendar.time = dataSelecionadaDeDate
-
-
-            val dataSelecionadaAteDate = form.parse("${anoAte}/${mesAte}/${diaAte}") as Date
-            val dataSelecionadaAteCalendar = Calendar.getInstance()
-            dataSelecionadaAteCalendar.time = dataSelecionadaAteDate
-
-
-
-            if(dataSelecionadaDeCalendar.timeInMillis <= dataSelecionadaAteCalendar.timeInMillis){
-
+            if(dataDe.timeInMillis <= dataAte.timeInMillis){
                 buscaExtrato(conta = conta,
-                    dataFim = "${anoAte}${mesAte}${diaAte}",
-                    dataInicio =  "${anoDe}${mesDe}${diaDe}")
+                    dataFim = dataAte.formataPara("yyyyMMdd"),
+                    dataInicio = dataDe.formataPara("yyyyMMdd"))
             }else{
                 Toast.makeText(this, "Data inválida", Toast.LENGTH_LONG).show()
             }
         }
     }
 
+    private fun configuraData(dataSelecionada : String) : Calendar{
+
+        val dataQuebradaDe: List<String> = dataSelecionada.split("/")
+        val diaDe = dataQuebradaDe[0]
+        val mesDe = dataQuebradaDe[1]
+        val anoDe = dataQuebradaDe[2]
+
+        val form = SimpleDateFormat("yyyyMMdd", Locale.US)
+
+        val dataSelecionadaDate = form.parse("${anoDe}${mesDe}${diaDe}")
+        val dataSelecionadaCalendar = Calendar.getInstance()
+        dataSelecionadaCalendar.time = dataSelecionadaDate
+
+        return dataSelecionadaCalendar
+    }
 
     private fun configuraRecyclerView() {
         val recyclerView = list_transacoes_recyclerview
@@ -158,6 +153,4 @@ class ExtratoActivity : AppCompatActivity() {
             dataPicker(campoData, ano, mes, dia)
         }
     }
-
-
 }
