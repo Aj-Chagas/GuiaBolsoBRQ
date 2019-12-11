@@ -43,10 +43,21 @@ class ExtratoActivity : AppCompatActivity() {
         bindViewConta(conta)
         configuraDatePickerDialog()
         configuraRecyclerView()
+        configuraTentarNovamente()
         buscaExtrato(conta = conta,
             dataFim = GregorianCalendar().formataPara("yyyyMMdd"),
             dataInicio =  GregorianCalendar().ultimos30Dias().formataPara("yyyyMMdd"))
 
+    }
+
+    private fun configuraTentarNovamente() {
+        val botaoTentarNovamente = list_transacoes_textview_tentar_novamente
+        botaoTentarNovamente.setOnClickListener {
+
+            val dataDe = extrato_edittext_input_data_de
+            val dataAte = extrato_edittext_input_data_ate
+            pesquisaPorData(dataDe, dataAte)
+        }
     }
 
     private fun bindViewConta(conta: Conta) {
@@ -66,6 +77,7 @@ class ExtratoActivity : AppCompatActivity() {
         viewModel.buscaExtrato(conta, dataFim, dataInicio).observe(this, androidx.lifecycle.Observer  {
 
             list_transacoes_progressBar.visibility = View.GONE
+            list_transacoes_textview_tentar_novamente.visibility = View.GONE
 
             it?.dado?.let { Extrato ->
 
@@ -73,12 +85,12 @@ class ExtratoActivity : AppCompatActivity() {
                     adapter.atualiza(Extrato.data)
                     list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.INVISIBLE
                 }else{
-                    adapter.atualiza(Extrato.data)
                     list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.VISIBLE
                 }
             }
             it?.erro?.let{
                 mostraErro("Verifique a conexão com a internet")
+                list_transacoes_textview_tentar_novamente.visibility = View.VISIBLE
             }
         })
     }
@@ -91,20 +103,25 @@ class ExtratoActivity : AppCompatActivity() {
         configuraCampoData(dataAte, GregorianCalendar())
 
         teste.setOnClickListener {
+            pesquisaPorData(dataDe, dataAte)
+        }
+    }
 
-            val dataSelecionadaDe = dataDe.text.toString()
-            val dataSelecionadaAte = dataAte.text.toString()
+    private fun pesquisaPorData(dataDe: EditText, dataAte: EditText) {
+        val dataSelecionadaDe = dataDe.text.toString()
+        val dataSelecionadaAte = dataAte.text.toString()
 
-            val dataDe = configuraData(dataSelecionadaDe)
-            val dataAte = configuraData(dataSelecionadaAte)
+        val dataDe = configuraData(dataSelecionadaDe)
+        val dataAte = configuraData(dataSelecionadaAte)
 
-            if(dataDe.timeInMillis <= dataAte.timeInMillis){
-                buscaExtrato(conta = conta,
-                    dataFim = dataAte.formataPara("yyyyMMdd"),
-                    dataInicio = dataDe.formataPara("yyyyMMdd"))
-            }else{
-                Toast.makeText(this, "Data inválida", Toast.LENGTH_LONG).show()
-            }
+        if (dataDe.timeInMillis <= dataAte.timeInMillis) {
+            buscaExtrato(
+                conta = conta,
+                dataFim = dataAte.formataPara("yyyyMMdd"),
+                dataInicio = dataDe.formataPara("yyyyMMdd")
+            )
+        } else {
+            Toast.makeText(this, "Data inválida", Toast.LENGTH_LONG).show()
         }
     }
 
