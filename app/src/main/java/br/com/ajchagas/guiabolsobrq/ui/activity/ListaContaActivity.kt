@@ -2,9 +2,12 @@ package br.com.ajchagas.guiabolsobrq.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.ajchagas.guiabolsobrq.R
@@ -16,18 +19,20 @@ import br.com.ajchagas.guiabolsobrq.repository.Repository
 import br.com.ajchagas.guiabolsobrq.ui.dialog.DialogListaContaActivity
 import br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter.ListAccountAdapter
 import br.com.ajchagas.guiabolsobrq.ui.viewmodel.ListaContaViewModel
-import kotlinx.android.synthetic.main.activity_extrato.*
 import kotlinx.android.synthetic.main.activity_list_account.*
 import kotlinx.android.synthetic.main.dialog_edita_apelido_conta.view.*
 import kotlinx.android.synthetic.main.recycler_view_list_account.*
 import java.math.BigDecimal
 
 
-class ListaContaActivity : AppCompatActivity() {
+class ListaContaActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
-    private val viewmodel by lazy{
+    private lateinit var listaContas: List<Conta>
+
+    private val viewmodel by lazy {
         val repository = Repository(AppDatabase.getInstance(this).contaDAO)
-        ViewModelProviders.of(this, ListaContaViewModel.FACTORY(repository)).get(ListaContaViewModel::class.java)
+        ViewModelProviders.of(this, ListaContaViewModel.FACTORY(repository))
+            .get(ListaContaViewModel::class.java)
     }
 
     private val adapter by lazy {
@@ -37,17 +42,19 @@ class ListaContaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_account)
-        title = "Conta"
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbarid2)
+        setSupportActionBar(toolbar)
+
         configuraClickDoCard()
         configuraFAB()
         buscaTodasContas()
         somaSaldoTotal()
-
     }
 
     private fun somaSaldoTotal() {
-        viewmodel.buscaTodos().observe(this, Observer { listaDeContasCadastradas ->
 
+        viewmodel.buscaTodos().observe(this, Observer { listaDeContasCadastradas ->
             if (listaDeContasCadastradas != null) {
                 var saldo: BigDecimal = BigDecimal.ZERO
                 for (conta: Conta in listaDeContasCadastradas) {
@@ -56,10 +63,15 @@ class ListaContaActivity : AppCompatActivity() {
                 item_saldo_total_valor.text = saldo.formataMoedaParaBrasileiro()
             }
         })
+
     }
 
     private fun buscaTodasContas() {
-        viewmodel.buscaTodos().observe(this, Observer {listaDeContasCadastradas ->
+        viewmodel.buscaTodos().observe(this, Observer { listaDeContasCadastradas ->
+
+            if (listaDeContasCadastradas != null) {
+                listaContas = listaDeContasCadastradas
+            }
 
             if (listaDeContasCadastradas != null) {
                 adapter.atualiza(listaDeContasCadastradas)
@@ -73,7 +85,7 @@ class ListaContaActivity : AppCompatActivity() {
         registerForContextMenu(list_account_recyclerview)
     }
 
-    private fun  abreActivityExtrato(contaClicada: Conta) {
+    private fun abreActivityExtrato(contaClicada: Conta) {
         val vaiParaExtrato = Intent(this, ExtratoActivity::class.java)
         vaiParaExtrato.putExtra("conta", contaClicada)
         startActivity(vaiParaExtrato)
@@ -92,9 +104,9 @@ class ListaContaActivity : AppCompatActivity() {
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
 
-        if(item.groupId == 0){
+        if (item.groupId == 0) {
             showAlertRemoverConta(item)
-        } else{
+        } else {
             showAlertEditarConta(item)
         }
 
@@ -134,7 +146,7 @@ class ListaContaActivity : AppCompatActivity() {
     }
 
 
-    private fun getContaSelecionada(item: MenuItem) : Conta{
+    private fun getContaSelecionada(item: MenuItem): Conta {
         val position = item.order
         return adapter.getItem(position)
 
@@ -142,6 +154,40 @@ class ListaContaActivity : AppCompatActivity() {
 
     private fun remove(conta: Conta) {
         viewmodel.remove(conta)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.action_search, menu)
+        val searchItem = menu?.findItem(R.id.action_search)
+        val searchView = searchItem?.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+        searchView.setQueryHint("Procurar...")
+
+        return true
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+
+        val entradaDoUsuario = newText.toLowerCase()
+        var contaDigitada = mutableListOf<Conta>()
+
+        for (conta: Conta in listaContas) {
+
+            if (conta.nomebanco.toLowerCase().contains(entradaDoUsuario) ||
+                conta.apelido.toLowerCase().contains(entradaDoUsuario) ||
+                conta.titular.toLowerCase().contains(entradaDoUsuario) ||
+                conta.agencia.toLowerCase().contains(entradaDoUsuario) ||
+                conta.numeroConta.toLowerCase().contains(entradaDoUsuario)
+            ) {
+                contaDigitada.add(conta)
+            }
+        }
+        adapter.atualiza(contaDigitada)
+        return true
     }
 }
 

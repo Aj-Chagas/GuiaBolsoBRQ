@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.ajchagas.guiabolsobrq.R
+import br.com.ajchagas.guiabolsobrq.extension.formataDataString
 import br.com.ajchagas.guiabolsobrq.extension.formataMoedaParaBrasileiro
+import br.com.ajchagas.guiabolsobrq.extension.formataMoedaSemSifrao
 import br.com.ajchagas.guiabolsobrq.model.TipoTransacao
 import br.com.ajchagas.guiabolsobrq.model.listaExtratoApi.Data
 import kotlinx.android.synthetic.main.extrato_item_transacao.view.*
@@ -45,12 +47,13 @@ class ListTransacoesAdapter(
         val data = itemView.list_transacoes_data_transacao
         val valor= itemView.list_transacoes_valor_transacao
 
+
         nome.text = transacao.lancamento
-        data.text = transacao.data_operacao
+        data.text = transacao.data_operacao.formataDataString()
         if(transacao.tipo_operacao == "C"){
-            valor.text = transacao.valor.formataMoedaParaBrasileiro()
+            valor.text = transacao.valor.formataMoedaSemSifrao()
         }else{
-            valor.text = "- " + transacao.valor.formataMoedaParaBrasileiro()
+            valor.text = "- " + transacao.valor.formataMoedaSemSifrao()
         }
     }
 

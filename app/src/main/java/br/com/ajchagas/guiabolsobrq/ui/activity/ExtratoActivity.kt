@@ -85,6 +85,7 @@ class ExtratoActivity : AppCompatActivity() {
                     adapter.atualiza(Extrato.data)
                     list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.INVISIBLE
                 }else{
+                    adapter.atualiza(Extrato.data)
                     list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.VISIBLE
                 }
             }
@@ -118,6 +119,7 @@ class ExtratoActivity : AppCompatActivity() {
             buscaExtrato(
                 conta = conta,
                 dataFim = dataAte.formataPara("yyyyMMdd"),
+                //"dd MMM"
                 dataInicio = dataDe.formataPara("yyyyMMdd")
             )
         } else {
