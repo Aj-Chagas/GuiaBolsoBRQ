@@ -1,24 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="10dp"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <TextView
+        android:layout_marginStart="20dp"
         android:src="@drawable/ic_launcher_foreground"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:scaleType="center"
-        android:background="#FFFFBB33"
-        android:contentDescription="@string/app_name" />
+        android:layout_height="wrap_content"
+        android:text="Editar Apelido"
+        android:textSize="18dp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@android:color/black"
+        android:contentDescription="@string/app_name"
+        android:layout_margin="8dp"/>
+
     <EditText
         android:id="@+id/dialog_edita_apelido_text"
         android:inputType="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_margin="4dp"
         android:hint="Apelido" />
 
 </LinearLayout>

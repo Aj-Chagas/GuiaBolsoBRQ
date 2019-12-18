@@ -11,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.database.AppDatabase
+import br.com.ajchagas.guiabolsobrq.extension.formataPara
+import br.com.ajchagas.guiabolsobrq.extension.mostraErro
 import br.com.ajchagas.guiabolsobrq.model.Conta
 import br.com.ajchagas.guiabolsobrq.model.listaBancoApi.Data
 import br.com.ajchagas.guiabolsobrq.repository.Repository
@@ -20,17 +22,21 @@ import br.com.ajchagas.guiabolsobrq.validator.ValidacaoPadrao
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.math.BigDecimal
+import java.util.*
 import kotlin.properties.Delegates
 
 
 class CadastroContaActivity : AppCompatActivity() {
 
-    private val validators : MutableList<ValidacaoPadrao> = mutableListOf()
+    private val validators: MutableList<ValidacaoPadrao> = mutableListOf()
     private val app_name = "Cadastro Conta"
 
     private val contaId: Int by lazy {
         intent.getIntExtra("contaId", 0)
     }
+
+    private var somatoria : BigDecimal = BigDecimal.ZERO
 
     private var bancoSelecionadoSpinner by Delegates.notNull<Data>()
 
@@ -81,32 +87,62 @@ class CadastroContaActivity : AppCompatActivity() {
                 val agencia = cadastro_edit_text_agencia.text.toString()
                 val conta = cadastro_edit_text_conta.text.toString()
 
-                salva(Conta
-                    (id = contaId,
+                val contaCriada = Conta(
+                    id = contaId,
                     idBanco = bancoSelecionadoSpinner.id,
                     nomebanco = bancoSelecionadoSpinner.nome,
                     titular = titular,
                     apelido = apelido,
                     agencia = agencia,
-                    numeroConta = conta))
+                    numeroConta = conta
+                )
+
+                if(agencia == bancoSelecionadoSpinner.agencia.toString() && conta == bancoSelecionadoSpinner.conta.toString() ){
+                    buscaSaldoDoExtrato(contaCriada)
+                }else{
+                    Toast.makeText(this, "Agência e/ou conta inválida", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
 
+    private fun buscaSaldoDoExtrato(contaCriada: Conta){
+        viewModel.buscaExtrato(contaCriada, GregorianCalendar().formataPara("yyyyMMdd"), "20191111")
+            .observe(this, Observer {
+                it?.dado?.let { Extrato ->
+                    if (Extrato.data.isNotEmpty()) {
+                        for (transacao in Extrato.data) {
+                            if (transacao.tipo_operacao == "C") {
+                                somatoria += transacao.valor
+                            } else {
+                                somatoria -= transacao.valor
+                            }
+                        }
+
+                    }
+                    contaCriada.saldo= somatoria
+                }
+                it?.erro?.let {
+                    mostraErro("Verifique a conexão com a internet")
+                }
+                salva(contaCriada)
+            })
+    }
+
     private fun salva(conta: Conta) {
         viewModel.salva(conta).observe(this, Observer {
-            if(it.erro == null){
+            if (it.erro == null) {
                 finish()
-            }else{
+            } else {
                 Toast.makeText(this, it.erro, Toast.LENGTH_LONG).show()
             }
         })
     }
 
-    private fun validaTodosOsCampos() : Boolean{
+    private fun validaTodosOsCampos(): Boolean {
         var estaValido = true
-        for (validator in validators){
-            if(!validator.estaValido()){
+        for (validator in validators) {
+            if (!validator.estaValido()) {
                 estaValido = false
             }
         }
@@ -127,12 +163,12 @@ class CadastroContaActivity : AppCompatActivity() {
         validators.add(validacaoPadrao)
         editText?.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                    validacaoPadrao.estaValido()
+                validacaoPadrao.estaValido()
             }
         }
     }
 
-    private fun configuraSpinner(listBancos : List<Data>) {
+    private fun configuraSpinner(listBancos: List<Data>) {
         val spinnerBancos = cadastro_spinner_bancos
         val adapter = configuraAdapterSpinner(listBancos)
         spinnerBancos.adapter = adapter
@@ -157,7 +193,6 @@ class CadastroContaActivity : AppCompatActivity() {
                 id: Long
             ) {
                 this@CadastroContaActivity.bancoSelecionadoSpinner = listBancos[position]
-
             }
 
         }

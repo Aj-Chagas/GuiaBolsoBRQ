@@ -39,6 +39,5 @@ class ListaContaViewModel(
 
     fun edita(conta: Conta) {
         return repository.edita(conta)
-
     }
 }

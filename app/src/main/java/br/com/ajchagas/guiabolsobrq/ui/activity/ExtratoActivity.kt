@@ -10,12 +10,14 @@ import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.database.AppDatabase
 import br.com.ajchagas.guiabolsobrq.extension.*
 import br.com.ajchagas.guiabolsobrq.model.Conta
+import br.com.ajchagas.guiabolsobrq.model.TipoTransacao
 import br.com.ajchagas.guiabolsobrq.repository.Repository
 import br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter.ListTransacoesAdapter
 import br.com.ajchagas.guiabolsobrq.ui.viewmodel.ExtratoViewModel
 import kotlinx.android.synthetic.main.activity_extrato.*
 import kotlinx.android.synthetic.main.recyclerview_list_transacoes.*
 import kotlinx.android.synthetic.main.toolbar.*
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,16 +40,44 @@ class ExtratoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_extrato)
 
         configuraToolBar()
-
         conta = DeserializacaoDaConta()
         bindViewConta(conta)
         configuraDatePickerDialog()
         configuraRecyclerView()
         configuraTentarNovamente()
+        buscaSaldoTransacoes(conta)
         buscaExtrato(conta = conta,
             dataFim = GregorianCalendar().formataPara("yyyyMMdd"),
             dataInicio =  GregorianCalendar().ultimos30Dias().formataPara("yyyyMMdd"))
+    }
 
+    private fun buscaSaldoTransacoes(conta : Conta) {
+        var saldo = BigDecimal.ZERO
+        viewModel.buscaExtrato(conta, GregorianCalendar().formataPara("yyyyMMdd"), "20191111")
+            .observe(this, androidx.lifecycle.Observer {
+
+                it?.dado?.let { Extrato ->
+
+                    if (Extrato.data.isNotEmpty()) {
+
+                        for (transacao in Extrato.data) {
+                            if (transacao.tipo_operacao == "C") {
+                                saldo += transacao.valor
+                            } else {
+                                saldo -= transacao.valor
+                            }
+                        }
+                        extrato_textview_saldo_total.text = saldo.formataMoedaParaBrasileiro()
+                        conta.saldo = saldo
+                        edita(conta)
+                    } else {
+                        extrato_textview_saldo_total.text = BigDecimal.ZERO.formataMoedaParaBrasileiro()
+                    }
+                }
+                it?.erro?.let {
+                    mostraErro("Verifique a conexão com a internet")
+                }
+            })
     }
 
     private fun configuraTentarNovamente() {
@@ -66,7 +96,6 @@ class ExtratoActivity : AppCompatActivity() {
         extrato_textview_nome_titular.text = conta.titular
         extrato_textview_numero_agencia.text = conta.agencia
         extrato_textview_numero_conta.text = conta.numeroConta
-        extrato_textview_saldo_total.text = conta.saldo.formataMoedaParaBrasileiro()
     }
 
     private fun DeserializacaoDaConta() = intent.getSerializableExtra("conta") as Conta
@@ -84,6 +113,7 @@ class ExtratoActivity : AppCompatActivity() {
                 if(Extrato.data.isNotEmpty()){
                     adapter.atualiza(Extrato.data)
                     list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.INVISIBLE
+
                 }else{
                     adapter.atualiza(Extrato.data)
                     list_transacoes_textview_msgDeDadosNaoEncontrado.visibility = View.VISIBLE
@@ -119,7 +149,6 @@ class ExtratoActivity : AppCompatActivity() {
             buscaExtrato(
                 conta = conta,
                 dataFim = dataAte.formataPara("yyyyMMdd"),
-                //"dd MMM"
                 dataInicio = dataDe.formataPara("yyyyMMdd")
             )
         } else {
@@ -171,5 +200,9 @@ class ExtratoActivity : AppCompatActivity() {
 
             dataPicker(campoData, ano, mes, dia)
         }
+    }
+
+    private fun edita(conta: Conta) {
+        viewModel.edita(conta)
     }
 }
