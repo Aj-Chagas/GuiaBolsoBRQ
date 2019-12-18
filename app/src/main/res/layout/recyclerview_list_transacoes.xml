@@ -30,6 +30,22 @@
         app:layout_constraintTop_toBottomOf="@+id/list_transacoes_progressBar"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+
+    <Button
+        android:id="@+id/list_transacoes_textview_tentar_novamente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tentar novamente"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:visibility="gone"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_transacoes_recyclerview"
         android:layout_width="0dp"

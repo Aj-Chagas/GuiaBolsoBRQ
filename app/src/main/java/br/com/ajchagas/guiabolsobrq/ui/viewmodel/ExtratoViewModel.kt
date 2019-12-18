@@ -24,4 +24,8 @@ class ExtratoViewModel(
         return repository.buscaExtratoNaApi(conta, dataAtual, ultimos30Dias)
     }
 
+    fun edita(conta: Conta) {
+        return repository.edita(conta)
+    }
+
 }

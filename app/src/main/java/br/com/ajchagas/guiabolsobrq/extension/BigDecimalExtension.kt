@@ -14,3 +14,14 @@ fun BigDecimal.formataMoedaParaBrasileiro() : String{
         .replace("R$", "R$ ")
         .replace("-R$", "R$ -")
 }
+
+fun BigDecimal.formataMoedaSemSifrao() : String{
+    val formatoBrasileiro = DecimalFormat
+        .getCurrencyInstance(
+            Locale("pt", "br")
+        )
+    return formatoBrasileiro
+        .format(this)
+        .replace("R$", " ")
+        .replace("-R$", "R$ -")
+}

@@ -2,7 +2,7 @@
     <string name="app_name">Guia Bolso BRQ</string>
     <string name="action_settings">Remover</string>
     <string name="saldo_total_layout">Saldo total</string>
-    <string name="saldo_total_valor">R$ 9.000.000.000,00</string>
+    <string name="saldo_total_valor">R$ 0,00</string>
     <string name="saldo_layout">SALDO</string>
     <string name="saldo_valor">R$ 1.000,00</string>
     <string name="nome_do_titular_layout">Nome do titular</string>

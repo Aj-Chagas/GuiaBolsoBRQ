@@ -2,6 +2,8 @@ package br.com.ajchagas.guiabolsobrq.ui.recyclerview.adapter
 
 import android.content.Context
 import android.view.*
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import br.com.ajchagas.guiabolsobrq.R
 import br.com.ajchagas.guiabolsobrq.extension.apenasAprimeiraLetraMaiuscula
@@ -14,6 +16,7 @@ class ListAccountAdapter(
     private val context: Context,
     var clickListener: (Conta) -> Unit = {}
 ) : RecyclerView.Adapter<ListAccountAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val viewCriada = LayoutInflater.from(context)
@@ -92,6 +95,5 @@ class ListAccountAdapter(
 
 
     }
-
 }
 
